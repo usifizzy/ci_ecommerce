@@ -33,4 +33,12 @@ class Store extends BaseController
     );
 
 
+    public function products()
+    {
+        $data = array();
+        $data['get_all_product'] = $this->products;
+        return view('app/store', $data);
+    }
+
+
 }
