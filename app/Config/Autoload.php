@@ -39,8 +39,14 @@ class Autoload extends AutoloadConfig
      *
      * @var array<string, list<string>|string>
      */
+    // public $psr4 = [
+    //     APP_NAMESPACE => APPPATH,
+    // ];
     public $psr4 = [
-        APP_NAMESPACE => APPPATH,
+        'App'         => APPPATH,                // To ensure filters, etc work
+        APP_NAMESPACE => APPPATH,                // For custom namespace
+        'Config'      => APPPATH . 'Config',
+        'App\Libraries' => APPPATH . 'Libraries' // Add this line
     ];
 
     /**
@@ -90,5 +96,5 @@ class Autoload extends AutoloadConfig
      *
      * @var list<string>
      */
-    public $helpers = [];
+    public $helpers = ['form'];
 }
