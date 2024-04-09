@@ -39,6 +39,21 @@ class Store extends BaseController
         $data['get_all_product'] = $this->products;
         return view('app/store', $data);
     }
+    
+
+    public function single($id)
+    {
+        $data = array();
+        $filteredProducts = array_filter($this->products, function($product) use ($id) {
+            return $product['id'] == $id;
+        });
+        if (!empty($filteredProducts)) {
+            $data['get_single_product'] = reset($filteredProducts); 
+        } else {
+            $data['get_single_product'] =  null;
+        }
+        return view('app/single-item', $data);
+    }
 
 
 }

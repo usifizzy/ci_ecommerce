@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple eCommerce</title>
+    <title>Product Details</title>
     <style>
         /* Basic styling */
 
@@ -106,6 +106,8 @@
             font-size: 1.5rem;
             font-weight: 300;
         }
+
+        
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -116,15 +118,15 @@
             margin: 0 auto;
             padding: 20px;
         }
-        .product {
+        .product-details {
             border: 1px solid #ccc;
             padding: 20px;
             margin-bottom: 20px;
         }
-        .product img {
-            max-width: 100px;
-            max-height: 100px;
-            margin-right: 10px;
+        .product-details img {
+            max-width: 200px;
+            max-height: 200px;
+            margin-right: 20px;
         }
         button {
             background-color: #4CAF50;
@@ -160,27 +162,20 @@
 </div>
 
 </header>
-        <h1>Our Products</h1>
-
-        <?php
-            
-            ?>
-            <div class="section group">
-                <?php foreach ($get_all_product as $single_products) { ?>
-                    <div class="product">
-                        <a href="<?= esc('store/'.$single_products["id"], 'url');?>"><img style="width:250px;height:250px" src="<?= esc('public/uploads/'.$single_products["image"])?>" alt="" /></a>
-                        <h2><?= esc($single_products["name"]) ?></h2>
-                        <!-- <p>< echo word_limiter($single_products["description"], 10) </p> -->
-                        <p><?php esc($single_products["description"]) ?></p>
-                        <p><span class="price"><?= esc($single_products["price"]) ?> NGN.</span></p>
-                        <div class="button"><span><a href="<?= esc('store/'.$single_products["id"], 'url');?>" class="details">Details</a></span></div>
+        <h1>Product Details</h1>
+        <div class="product-details">
+            <img src="product1.jpg" alt="Product 1">
+            <h2><?= esc($get_single_product['name']) ?></h2>
+            <p>Description: <?php esc($get_single_product['description']) ?></p>
+            <p>Price: NGN<?= esc($get_single_product['price']) ?></p>
+                    <div class="add-cart">
+                        <form action="<?= esc('store/add/cart', 'url');?>" method="post">
+                            <input type="number" class="buyfield" name="quantity" value="1"/>
+                            <input type="hidden" class="buyfield" name="product_id" value="<?= esc($get_single_product['id'])?>"/>
+                            <input type="submit" class="buysubmit" name="submit" value="Add to Cart"/>
+                        </form>				
                     </div>
-                    <?php
-                }
-                ?>
-
-            </div>
+        </div>
     </div>
-
 </body>
 </html>
