@@ -165,13 +165,13 @@
         <h1>Product Details</h1>
         <div class="product-details">
             <img src="product1.jpg" alt="Product 1">
-            <h2><?= esc($get_single_product['name']) ?></h2>
-            <p>Description: <?php esc($get_single_product['description']) ?></p>
-            <p>Price: NGN<?= esc($get_single_product['price']) ?></p>
+            <h2><?= esc($get_single_product->name) ?></h2>
+            <p>Description: <?php esc($get_single_product->description) ?></p>
+            <p>Price: NGN<?= esc($get_single_product->price) ?></p>
                     <div class="add-cart">
                         <form action="<?= esc('store/cart/add', 'url');?>" method="post">
                             <input type="number" class="buyfield" name="quantity" value="1"/>
-                            <input type="hidden" class="buyfield" name="product_id" value="<?= esc($get_single_product['id'])?>"/>
+                            <input type="hidden" class="buyfield" name="product_id" value="<?= esc($get_single_product->id)?>"/>
                             <input type="submit" class="buysubmit" name="submit" value="Add to Cart"/>
                         </form>				
                     </div>

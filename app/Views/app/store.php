@@ -168,12 +168,12 @@
             <div class="section group">
                 <?php foreach ($get_all_product as $single_products) { ?>
                     <div class="product">
-                        <a href="<?= esc('store/'.$single_products["id"], 'url');?>"><img style="width:250px;height:250px" src="<?= esc('public/uploads/'.$single_products["image"])?>" alt="" /></a>
-                        <h2><?= esc($single_products["name"]) ?></h2>
+                        <a href="<?= esc('store/'.$single_products->id, 'url');?>"><img style="width:250px;height:250px" src="<?= esc('public/uploads/'.$single_products->image)?>" alt="" /></a>
+                        <h2><?= esc($single_products->name) ?></h2>
                         <!-- <p>< echo word_limiter($single_products["description"], 10) </p> -->
-                        <p><?php esc($single_products["description"]) ?></p>
-                        <p><span class="price"><?= esc($single_products["price"]) ?> NGN.</span></p>
-                        <div class="button"><span><a href="<?= esc('store/'.$single_products["id"], 'url');?>" class="details">Details</a></span></div>
+                        <p><?php esc($single_products->description) ?></p>
+                        <p><span class="price"><?= esc($single_products->price) ?> NGN.</span></p>
+                        <div class="button"><span><a href="<?= esc('store/'.$single_products->id, 'url');?>" class="details">Details</a></span></div>
                     </div>
                     <?php
                 }

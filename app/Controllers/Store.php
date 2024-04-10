@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Models\ProductModel;
+
 class Store extends BaseController
 {
     private $products = array(
@@ -35,23 +37,26 @@ class Store extends BaseController
 
     public function products()
     {
+        $productModel = new ProductModel();
         $data = array();
-        $data['get_all_product'] = $this->products;
+        $data['get_all_product'] = $productModel->findAll();
         return view('app/store', $data);
     }
-    
+
 
     public function single($id)
     {
+        $productModel = new ProductModel();
         $data = array();
-        $filteredProducts = array_filter($this->products, function($product) use ($id) {
-            return $product['id'] == $id;
-        });
-        if (!empty($filteredProducts)) {
-            $data['get_single_product'] = reset($filteredProducts); 
-        } else {
-            $data['get_single_product'] =  null;
-        }
+        // $filteredProducts = array_filter($this->products, function($product) use ($id) {
+        //     return $product['id'] == $id;
+        // });
+        // if (!empty($filteredProducts)) {
+        //     $data['get_single_product'] = reset($filteredProducts); 
+        // } else {
+        //     $data['get_single_product'] =  null;
+        // }
+        $data['get_single_product'] = $productModel->find($id); 
         return view('app/single-item', $data);
     }
 
