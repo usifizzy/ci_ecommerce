@@ -88,7 +88,7 @@ class Auth extends BaseController
     public function logout(){
         $this->session->remove('isUserLoggedIn');
         $this->session->remove('userId');
-        $this->session->remove();
+        $this->session->regenerate();
         return redirect('auth/login');
     }
     

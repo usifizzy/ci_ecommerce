@@ -82,16 +82,16 @@
 
     <div class="content">
         
-    <h2>Product List</h2>
+    <h2>Order List</h2>
     <table>
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Category</th>
-                <th>Description</th>
-                <th>Image</th>
+                <th>Order No</th>
+                <th>Amount</th>
+                <th>Customer Email</th>
+                <th>Customer Name</th>
+                <th>Order Details</th>
                 <th> </th>
             </tr>
         </thead>
