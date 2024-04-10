@@ -11,15 +11,33 @@ class UserSeeder extends Seeder
     {
         $user = new User();
         $user->setPassword('AdSystemMin12#');
+        $userCustomers = new User();
+        $userCustomers->setPassword('Customer12#');
         //
         $data = [
-            'name' => 'system admin',
-            'email'    => 'usifizzy@yahoo.com',
-            'role' => 'Admin',
-            'phone' => '+441000000000',
-            'password' => $user->password
+            [
+                'name' => 'system admin',
+                'email'    => 'usifizzy@yahoo.com',
+                'role' => 'Admin',
+                'phone' => '+441000000000',
+                'password' => $user->password
+            ],
+            [
+                'name' => 'Jane Doe',
+                'email'    => 'customer@usifizzy.com',
+                'role' => 'User',
+                'phone' => '+441000000001',
+                'password' => $userCustomers->password
+            ],
+            [
+                'name' => 'Average Joe',
+                'email'    => 'byer@usifizzy.com',
+                'role' => 'User',
+                'phone' => '+441000000002',
+                'password' => $userCustomers->password
+            ]
         ];
 
-        $this->db->table('users')->insert($data);
+        $this->db->table('users')->insertBatch($data);
     }
 }

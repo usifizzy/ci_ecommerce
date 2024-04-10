@@ -22,6 +22,7 @@ class UserModel extends Migration
             'email' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '100',
+                'unique' => true
             ],
             'role' => [
                 'type'       => 'VARCHAR',
@@ -30,6 +31,7 @@ class UserModel extends Migration
             'phone' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '16',
+                'unique' => true
             ],
             'password' => [
                 'type' => 'VARCHAR',

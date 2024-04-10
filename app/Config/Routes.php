@@ -14,3 +14,6 @@ $routes->post('store/cart/add', 'StoreCart::add_item');
 $routes->post('store/cart/update', 'StoreCart::update_item');
 $routes->post('store/cart/remove', 'StoreCart::remove_item');
 $routes->post('store/cart/empty', 'StoreCart::empty_cart');
+$routes->post('auth/login', 'Auth::login');
+$routes->get('auth/login', 'Auth::index');
+
