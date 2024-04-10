@@ -72,10 +72,10 @@
 <body>
     <div class="sidebar">
         <ul>
-            <li>Dashboard</li>
-            <li>Products</li>
+            <li><a href="/admin">Dashboard</a></li>
+            <li><a href="/admin/products">Products</a></li>
             <li>Orders</li>
-            <li>Customers</li>
+            <li><a href="/admin/customers">Customers</a></li>
             <li><a href="/auth/signout">Sign Out</a></li>
         </ul>
     </div>

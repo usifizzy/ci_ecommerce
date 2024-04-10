@@ -28,4 +28,12 @@ class Admin extends BaseController
         $data['get_all_products'] = $this->productModel->findAll();
         return view('admin/products', $data);
     }
+
+
+    public function customers()
+    {
+        $data = array();
+        $data['get_all_customers'] = $this->userModel->where(['role' => 'User'])->findAll();
+        return view('admin/customers', $data);
+    }
 }

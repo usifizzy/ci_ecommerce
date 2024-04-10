@@ -18,7 +18,7 @@ $routes->post('auth/login', 'Auth::login');
 $routes->get('auth/login', 'Auth::index');
 $routes->get('auth/signout', 'Auth::logout');
 $routes->get('admin', 'Admin::index');
-$routes->get('admin/users', 'Admin::users');
+$routes->get('admin/customers', 'Admin::customers');
 $routes->get('admin/products', 'Admin::products');
 // $routes->get('admin/products/(:num)', 'Admin::index');
 $routes->get('admin/add/products', 'Admin::new_products');

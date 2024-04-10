@@ -72,9 +72,9 @@
 <body>
     <div class="sidebar">
         <ul>
-            <li>Dashboard</li>
-            <li>Products</li>
-            <li>Orders</li>
+            <li><a href="/admin">Dashboard</a></li>
+            <li><a href="/admin/products">Products</a></li>
+            <li><a href="/admin/orders">Orders</a></li>
             <li>Customers</li>
             <li><a href="/auth/signout">Sign Out</a></li>
         </ul>
@@ -98,15 +98,15 @@
         <tbody>
         <?php 
         $count = 1;
-        foreach ($get_all_products as $single_products) 
+        foreach ($get_all_customers as $single_customer) 
         { ?>
             <tr>
                 <td><?= esc($count++)?></td>
-                <td><?= esc($single_products->name) ?></td>
-                <td><?= esc($single_products->price) ?></td>
-                <td><?= esc($single_products->category) ?></td>
-                <td><?= esc($single_products->description) ?></td>
-                <td><img src="<?= esc('public/uploads/'.$single_products->image)?>" alt="<?= esc($single_products->name) ?>"></td>
+                <td><?= esc($single_customer->name) ?></td>
+                <td><?= esc($single_customer->email) ?></td>
+                <td><?= esc($single_customer->phone) ?></td>
+                <td><?= esc($single_customer->role) ?></td>
+                <td> </td>
                 <td> </td>
             </tr>
             

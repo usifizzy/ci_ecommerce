@@ -72,7 +72,7 @@
 <body>
     <div class="sidebar">
         <ul>
-            <li>Dashboard</li>
+            <li><a href="/admin">Dashboard</a></li>
             <li>Products</li>
             <li>Orders</li>
             <li>Customers</li>
