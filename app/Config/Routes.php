@@ -16,10 +16,11 @@ $routes->post('store/cart/remove', 'StoreCart::remove_item');
 $routes->post('store/cart/empty', 'StoreCart::empty_cart');
 $routes->post('auth/login', 'Auth::login');
 $routes->get('auth/login', 'Auth::index');
+$routes->get('auth/signout', 'Auth::logout');
 $routes->get('admin', 'Admin::index');
-$routes->get('admin/users', 'Store::users');
-$routes->get('admin/products', 'Store::products');
+$routes->get('admin/users', 'Admin::users');
+$routes->get('admin/products', 'Admin::products');
 // $routes->get('admin/products/(:num)', 'Admin::index');
-$routes->get('admin/add/products', 'Store::new_products');
+$routes->get('admin/add/products', 'Admin::new_products');
 $routes->get('admin/delete/products/(:num)', 'Admin::delete_product');
 

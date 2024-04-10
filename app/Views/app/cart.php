@@ -163,6 +163,7 @@
         <li class="menu-item hidden"><a href="/store">Home</a></li>
         <li class="menu-item hidden"><a href="/cart" target="_blank">Cart</a>
         </li>
+        <?php echo $isUserLoggedIn ? '<li class="menu-item hidden"><a href="/auth/signout">Sign Out</a>' : ''; ?>
         <!-- <li class="menu-item hidden"><a href="https://forum.codeigniter.com/" target="_blank">Community</a></li>
         <li class="menu-item hidden"><a
                 href="https://codeigniter.com/contribute" target="_blank">Contribute</a>

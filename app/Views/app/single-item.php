@@ -158,6 +158,7 @@
         <li class="menu-item hidden"><a href="/store">Home</a></li>
         <li class="menu-item hidden"><a href="/cart">Cart</a>
         </li>
+        <?php echo $isUserLoggedIn ? '<li class="menu-item hidden"><a href="/auth/signout">Sign Out</a>' : ''; ?>
     </ul>
 </div>
 

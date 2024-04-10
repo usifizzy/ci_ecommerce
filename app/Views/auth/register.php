@@ -44,9 +44,11 @@
 <body>
     <form action="your_action_here.php" method="post">
         <h2>Sign Up</h2>
-        <input type="text" name="username" placeholder="Username" required>
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="text" name="phone" placeholder="Phone" required>
         <input type="email" name="email" placeholder="Email" required>
         <input type="password" name="password" placeholder="Password" required>
+        <input type="password" name="password_conf" placeholder="Confirm Password" required>
         <input type="submit" value="Sign Up">
     </form>
 </body>

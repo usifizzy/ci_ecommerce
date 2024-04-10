@@ -4,10 +4,12 @@ namespace App\Controllers;
 
 use App\Libraries\Cart;
 use App\Models\ProductModel;
+use Config\Services;
 
 class StoreCart extends BaseController
 {
     protected $cart;
+    protected $session;
 
 
     // private $products = array(
@@ -45,6 +47,7 @@ class StoreCart extends BaseController
         // Load the Cart library using dependency injection
         $this->cart = new Cart();
         $this->productModel = new ProductModel();
+        $this->session = Services::session();
     }
 
 
@@ -53,6 +56,7 @@ class StoreCart extends BaseController
     {
         $data = array();
         $data['cart_contents'] = $this->cart->getItems();
+        $data['isUserLoggedIn'] = $this->session->get('isUserLoggedIn');
         return view('app/cart', $data);
     }
 
@@ -66,13 +70,13 @@ class StoreCart extends BaseController
         $product_id = $post_data['product_id'];
         $quantity     = $post_data['quantity'];
         // $results    = $this->singleProduct($product_id);
-        $results = $this->productModel->find($id); 
+        $results = $this->productModel->find($product_id); 
         
 
-        $name    = $results['name'];
-        $price   = $results['price'];
+        $name    = $results->name;
+        $price   = $results->price;
         // $data['options'] = array('product_image' => $results['image']);
-        $options = $results['image'];
+        $options = $results->image;
 
         $this->cart->addItem($product_id, $quantity, $name, $price, $options );
         return redirect()->to('cart');

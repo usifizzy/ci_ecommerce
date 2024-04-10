@@ -53,32 +53,43 @@ class Auth extends BaseController
             $checkLogin = $this->userModel->where(['email' => $post_data['email']])->first();
             if($checkLogin){
                 if (password_verify($post_data['password'], $checkLogin->password)) {
-                    $cartItems = $this->session->get('cart_items') ?? [];
-                    echo 'Password is correct';
+                    $cartItems = $this->session->get('cart_items');
+                    // echo 'Password is correct';
+                    // echo $checkLogin->role;
                     $this->session->set('isUserLoggedIn',TRUE);
                     $this->session->set('userId',$checkLogin->id);
                     $this->session->set('userRole',$checkLogin->role);
-                    $checkLogin->role == 'Admin' ? return view('admin', $data) : isset($cartItems[$productId]) ? redirect('cart') : redirect('store');
+                    return $checkLogin->role == 'Admin' ? redirect('admin') : (isset($cartItems) ? redirect('cart') : redirect('store'));
+                    // if ($checkLogin->role == 'Admin') {
+                    //     redirect('admin');
+                    // } else {
+                    //     if (isset($cartItems[$productId])) {
+                    //         redirect('cart');
+                    //     } else {
+                    //         redirect('store');
+                    //     }
+                    // }
+                    
+                }else {
+                    $data['error_msg'] = 'Password is incorrect';
                 }
-                //  else {
-                //     $data['error_msg'] = 'Password is incorrect';
-                // }
             }else{
                 $data['error_msg'] = 'Wrong email or password, please try again.';
+                return view('auth/login', $data);
             }
         }else{
             $data['error_msg'] = 'Wrong email or password, please try again.';
+            return view('auth/login', $data);
         }
-        return view('auth/login', $data);
     }
     
 
     
     public function logout(){
-        $this->session->unset_userdata('isUserLoggedIn');
-        $this->session->unset_userdata('userId');
-        $this->session->sess_destroy();
-        redirect('auth/login/');
+        $this->session->remove('isUserLoggedIn');
+        $this->session->remove('userId');
+        $this->session->remove();
+        return redirect('auth/login');
     }
     
 }

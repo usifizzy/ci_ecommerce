@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\ProductModel;
+use Config\Services;
 
 class Store extends BaseController
 {
@@ -35,9 +36,13 @@ class Store extends BaseController
     // );
 
     protected $productModel;
+    protected $session;
+    protected $isUserLoggedIn;
 
     public function __construct() {
         $this->productModel = new ProductModel();
+        $this->session = Services::session();
+        $this->isUserLoggedIn = $this->session->get('isUserLoggedIn');
     }
 
 
@@ -46,6 +51,7 @@ class Store extends BaseController
         $data = array();
         // $data['get_all_product'] = $this->products;
         $data['get_all_product'] = $this->productModel->findAll();
+        $data['isUserLoggedIn'] = $this->isUserLoggedIn;
         return view('app/store', $data);
     }
 
@@ -61,7 +67,8 @@ class Store extends BaseController
         // } else {
         //     $data['get_single_product'] =  null;
         // }
-        $data['get_single_product'] = $this->productModel->find($id); 
+        $data['get_single_product'] = $this->productModel->find($id);
+        $data['isUserLoggedIn'] = $this->isUserLoggedIn;
         return view('app/single-item', $data);
     }
 

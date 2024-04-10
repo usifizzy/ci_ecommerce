@@ -5,11 +5,12 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\ProductModel;
-use App\Models\UsertModel;
+use App\Models\UserModel;
 
 class Admin extends BaseController
 {
     protected $productModel;
+    protected $userModel;
 
     public function __construct() {
         $this->productModel = new ProductModel();
@@ -17,7 +18,7 @@ class Admin extends BaseController
     }
     public function index()
     {
-        //
+        return view('welcome_message');
     }
 
 

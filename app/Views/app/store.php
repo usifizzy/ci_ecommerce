@@ -155,6 +155,7 @@
         </li>
         <li class="menu-item hidden"><a href="/store">Home</a></li>
         <li class="menu-item hidden"><a href="/cart">Cart</a>
+        <?php echo $isUserLoggedIn ? '<li class="menu-item hidden"><a href="/auth/signout">Sign Out</a>' : ''; ?>
         </li>
     </ul>
 </div>
@@ -168,7 +169,7 @@
             <div class="section group">
                 <?php foreach ($get_all_product as $single_products) { ?>
                     <div class="product">
-                        <a href="<?= esc('store/'.$single_products->id, 'url');?>"><img style="width:250px;height:250px" src="<?= esc('public/uploads/'.$single_products->image)?>" alt="" /></a>
+                        <a href="<?= esc('store/'.$single_products->id, 'url');?>"><img style="width:250px;height:250px" src="<?= esc('public/uploads/'.$single_products->image)?>" alt="<?= esc($single_products->name) ?>" /></a>
                         <h2><?= esc($single_products->name) ?></h2>
                         <!-- <p>< echo word_limiter($single_products["description"], 10) </p> -->
                         <p><?php esc($single_products->description) ?></p>
