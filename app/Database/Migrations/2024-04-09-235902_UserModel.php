@@ -39,16 +39,13 @@ class UserModel extends Migration
             ],
             'created_at' => [
                 'type' => 'datetime',
-                'constraint' => '6',
             ],
             'updated_at' => [
                 'type' => 'datetime',
-                'constraint' => '6',
                 'null' => true,
             ],
             'deleted_at' => [
                 'type' => 'datetime',
-                'constraint' => '6',
                 'null' => true,
             ],
         ]);

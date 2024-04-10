@@ -21,16 +21,14 @@ class ProductModel extends Migration
             ],
             'price' => [
                 'type'       => 'decimal',
-                'constraint' => '38',
-                'decimal' => '2',
+                'constraint' => '38,2',
             ],
             'category' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '16',
             ],
             'description' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '16',
+                'type'       => 'TEXT',
             ],
             'image' => [
                 'type' => 'VARCHAR',
@@ -38,16 +36,13 @@ class ProductModel extends Migration
             ],
             'created_at' => [
                 'type' => 'datetime',
-                'constraint' => '6',
             ],
             'updated_at' => [
                 'type' => 'datetime',
-                'constraint' => '6',
                 'null' => true,
             ],
             'deleted_at' => [
                 'type' => 'datetime',
-                'constraint' => '6',
                 'null' => true,
             ],
         ]);
