@@ -47,16 +47,15 @@ class StoreCart extends BaseController
 
     public function index()
     {
-        $data                  = array();
+        $data = array();
         $data['cart_contents'] = $this->cart->getItems();
         return view('app/cart', $data);
     }
 
 
 
-    public function add()
+    public function add_item()
     {
-        helper('form');
 
         $post_data = $this->request->getPost(['product_id', 'quantity']);
         $data       = array();
@@ -74,7 +73,7 @@ class StoreCart extends BaseController
         return redirect()->to('cart');
     }
 
-    public function update_cart_item()
+    public function update_item()
     {
         helper('form');
         $product_id = $post_data['product_id'];
@@ -84,7 +83,7 @@ class StoreCart extends BaseController
         redirect('cart');
     }
 
-    public function remove_cart_item()
+    public function remove_item()
     {
         helper('form');
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Details</title>
+    <title>Shopping Cart</title>
     <style>
         /* Basic styling */
 
@@ -107,7 +107,6 @@
             font-weight: 300;
         }
 
-        
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -118,24 +117,30 @@
             margin: 0 auto;
             padding: 20px;
         }
-        .product-details {
-            border: 1px solid #ccc;
-            padding: 20px;
-            margin-bottom: 20px;
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
         }
-        .product-details img {
-            max-width: 200px;
-            max-height: 200px;
-            margin-right: 20px;
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
         }
-        button {
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .checkout-button {
             background-color: #4CAF50;
             color: white;
             padding: 10px 20px;
             border: none;
             cursor: pointer;
         }
-        button:hover {
+        .checkout-button:hover {
             background-color: #45a049;
         }
     </style>
@@ -156,26 +161,60 @@
             <button id="menuToggle">&#9776;</button>
         </li>
         <li class="menu-item hidden"><a href="/store">Home</a></li>
-        <li class="menu-item hidden"><a href="/cart">Cart</a>
+        <li class="menu-item hidden"><a href="/cart" target="_blank">Cart</a>
         </li>
+        <!-- <li class="menu-item hidden"><a href="https://forum.codeigniter.com/" target="_blank">Community</a></li>
+        <li class="menu-item hidden"><a
+                href="https://codeigniter.com/contribute" target="_blank">Contribute</a>
+        </li> -->
     </ul>
 </div>
 
 </header>
-        <h1>Product Details</h1>
-        <div class="product-details">
-            <img src="product1.jpg" alt="Product 1">
-            <h2><?= esc($get_single_product['name']) ?></h2>
-            <p>Description: <?php esc($get_single_product['description']) ?></p>
-            <p>Price: NGN<?= esc($get_single_product['price']) ?></p>
-                    <div class="add-cart">
-                        <form action="<?= esc('store/cart/add', 'url');?>" method="post">
-                            <input type="number" class="buyfield" name="quantity" value="1"/>
-                            <input type="hidden" class="buyfield" name="product_id" value="<?= esc($get_single_product['id'])?>"/>
-                            <input type="submit" class="buysubmit" name="submit" value="Add to Cart"/>
-                        </form>				
-                    </div>
-        </div>
-    </div>
-</body>
+    <h1>Shopping Cart</h1>
+
+
+    <?php //var_dump($cart_contents) ?>
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <?php
+                        $i = 0;
+                        $total = 0;
+                        foreach ($cart_contents as $cart_items) {
+                            $i++;
+                            $total += ($cart_items['price'] * $cart_items['quantity'])
+                            ?>
+            <tr>
+                <td><?= esc($cart_items['name']) ?></td>
+                <td>NGN <?= esc($cart_items['price']) ?></td>
+                <td><?= esc($cart_items['quantity']) ?></td>
+                <td>NGN <?= esc($cart_items['price'] * $cart_items['quantity']) ?></td>
+                <td><button>Remove</button></td>
+            </tr>
+            
+            <?php } ?>
+            <tr>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th>NGN <?= esc($total) ?></th>
+                <th> </th>
+            </tr>
+        </tbody>
+    </table>
+    <button class="checkout-button">Checkout</button>
+
+
+                        </div>
+                    </body>
 </html>
