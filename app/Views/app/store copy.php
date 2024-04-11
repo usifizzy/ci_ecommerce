@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Grid List</title>
+    <title>Simple eCommerce</title>
     <style>
-        
+        /* Basic styling */
+
         * {
             transition: background-color 300ms ease, color 300ms ease;
         }
@@ -105,59 +106,67 @@
             font-size: 1.5rem;
             font-weight: 300;
         }
-
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
         }
         .container {
-            max-width: 1000px;
+            max-width: 800px;
             margin: 0 auto;
             padding: 20px;
         }
-
-        /* Product grid container */
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
+        .product {
+            border: 1px solid #ccc;
             padding: 20px;
+            margin-bottom: 20px;
+        }
+        .product img {
+            max-width: 100px;
+            max-height: 100px;
+            margin-right: 10px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        /* Style for product image container */
+        .product-image-container {
+            width: 100%;
+            max-width: 300px; /* Adjust maximum width as needed */
+            margin: 0 auto;
         }
 
-        /* Individual product item */
-        .product-item {
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 20px;
-            text-align: center;
-        }
-
-        /* Product image */
+        /* Style for product image */
         .product-image {
-            max-width: 100%;
+            width: 100%;
             height: auto;
-            margin-bottom: 10px;
+            border: 1px solid #ddd; /* Add border for better visibility */
+            border-radius: 5px; /* Add border radius for rounded corners */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
         }
 
-        /* Product title */
-        .product-title {
-            font-weight: bold;
-            margin-bottom: 5px;
+        /* Style for product image hover effect (optional) */
+        .product-image:hover {
+            transform: scale(1.05); /* Increase size on hover */
+            transition: transform 0.3s ease; /* Smooth transition */
+            cursor: pointer;
         }
 
-        /* Product price */
-        .product-price {
-            color: #007bff; /* Change color to your preference */
-        }
     </style>
 </head>
-
 <body>
-
     <div class="container">
 
-    <header>
+<header>
+
 <div class="menu">
     <ul>
         <li class="logo">
@@ -177,20 +186,27 @@
 </header>
         <h1>Our Products</h1>
 
-    <div class="product-grid">
+        <?php
+            
+            ?>
+            <div class="section group">
                 <?php foreach ($get_all_product as $single_products) { ?>
-        <!-- Product 1 -->
-        <div class="product-item">
-            <a href="<?= esc('store/'.$single_products->id, 'url');?>"><img class="product-image" style="width:250px;height:250px" src="<?= base_url() . esc('uploads/'.$single_products->image )?>" alt="<?= esc($single_products->name) ?>" /></a>
-            <div class="product-title"><?= esc($single_products->name) ?></div>
-            <div><?php esc(word_limiter($single_products->description, 10)) ?></div>
-            <div class="product-price"><span class="price"><?= esc($single_products->price) ?> NGN.</span></div>
-            <div class="button"><span><a href="<?= esc('store/'.$single_products->id, 'url');?>" class="details">Details</a></span></div>
-        </div>
+                    <div class="product">
+                        <div class="product-image-container">
+                            <a href="<?= esc('store/'.$single_products->id, 'url');?>"><img class="product-image" style="width:250px;height:250px" src="<?= base_url() . esc('uploads/'.$single_products->image )?>" alt="<?= esc($single_products->name) ?>" /></a>
+                        </div>
+
+                        <h2><?= esc($single_products->name) ?></h2>
+                        <p><?php esc(word_limiter($single_products->description, 10)) ?></p>
+                        <p><span class="price"><?= esc($single_products->price) ?> NGN.</span></p>
+                        <div class="button"><span><a href="<?= esc('store/'.$single_products->id, 'url');?>" class="details">Details</a></span></div>
+                    </div>
                     <?php
                 }
                 ?>
-    </div>
+
             </div>
+    </div>
+
 </body>
 </html>

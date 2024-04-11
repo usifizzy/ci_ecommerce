@@ -118,14 +118,43 @@
             margin: 0 auto;
             padding: 20px;
         }
+
+
+        .product-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px;
+        }
+        .product-image {
+            max-width: 50%;
+            padding-right: 20px;
+        }
+        .product-content {
+            max-width: 50%;
+        }
+        .product-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .product-description {
+            margin-bottom: 10px;
+        }
+        .product-price {
+            color: #007bff;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
         .product-details {
             border: 1px solid #ccc;
             padding: 20px;
             margin-bottom: 20px;
         }
         .product-details img {
-            max-width: 200px;
-            max-height: 200px;
+            max-width: 100%;
+            max-height: 100%;
             margin-right: 20px;
         }
         button {
@@ -163,12 +192,20 @@
 
 </header>
         <h1>Product Details</h1>
-        <div class="product-details">
-            <img src="product1.jpg" alt="Product 1">
-            <h2><?= esc($get_single_product->name) ?></h2>
-            <p>Description: <?php esc($get_single_product->description) ?></p>
-            <p>Price: NGN<?= esc($get_single_product->price) ?></p>
-                    <div class="add-cart">
+      
+    <div class="product-container product-details">
+        <div class="product-image">
+            <img src="<?= base_url() . esc('uploads/'.$get_single_product->image )?>" alt="<?= esc($get_single_product->name) ?>">
+        </div>
+        <div class="product-content">
+            <div class="product-title"><?= esc($get_single_product->name) ?></div>
+            <div class="product-description">
+            <?php esc($get_single_product->description) ?>
+            </div>
+            <div class="product-price">$<?= esc($get_single_product->price) ?></div>
+            <!-- <button>Add to Cart</button> -->
+
+            <div class="add-cart">
                         <form action="<?= esc('store/cart/add', 'url');?>" method="post">
                             <input type="number" class="buyfield" name="quantity" value="1"/>
                             <input type="hidden" class="buyfield" name="product_id" value="<?= esc($get_single_product->id)?>"/>
@@ -176,6 +213,7 @@
                         </form>				
                     </div>
         </div>
+    </div>
     </div>
 </body>
 </html>

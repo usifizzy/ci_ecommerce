@@ -20,21 +20,24 @@ class UserSeeder extends Seeder
                 'email'    => 'usifizzy@yahoo.com',
                 'role' => 'Admin',
                 'phone' => '+441000000000',
-                'password' => $user->password
+                'password' => $user->password,
+                'address' => 'WD Street, East London'
             ],
             [
                 'name' => 'Jane Doe',
                 'email'    => 'customer@usifizzy.com',
                 'role' => 'User',
                 'phone' => '+441000000001',
-                'password' => $userCustomers->password
+                'password' => $userCustomers->password,
+                'address' => 'WD Street, East London'
             ],
             [
                 'name' => 'Average Joe',
                 'email'    => 'byer@usifizzy.com',
                 'role' => 'User',
                 'phone' => '+441000000002',
-                'password' => $userCustomers->password
+                'password' => $userCustomers->password,
+                'address' => 'WD Street, East London'
             ]
         ];
 

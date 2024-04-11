@@ -15,6 +15,10 @@ class OrderModel extends Migration
                 'constraint' => '20',
                 'auto_increment' => true,
             ],
+            'customer_id' => [
+                'type'       => 'bigint',
+                'constraint' => '20',
+            ],
             'order_no' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '100',

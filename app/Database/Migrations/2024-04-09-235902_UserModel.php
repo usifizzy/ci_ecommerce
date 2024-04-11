@@ -37,6 +37,9 @@ class UserModel extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => '256',
             ],
+            'address' => [
+                'type' => 'text',
+            ],
             'created_at' => [
                 'type' => 'datetime',
             ],

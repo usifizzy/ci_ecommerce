@@ -22,7 +22,10 @@ $routes->get('auth/signout', 'Auth::logout');
 $routes->get('admin', 'Admin::index');
 $routes->get('admin/customers', 'Admin::customers');
 $routes->get('admin/products', 'Admin::products');
+$routes->get('admin/orders', 'Admin::orders');
+$routes->get('admin/order/details/(:num)', 'Admin::order_details/$1');
 // $routes->get('admin/products/(:num)', 'Admin::index');
-$routes->get('admin/add/products', 'Admin::new_products');
+$routes->get('admin/add/products', 'Admin::upload');
 $routes->get('admin/delete/products/(:num)', 'Admin::delete_product');
 
+$routes->post('product/upload', 'Admin::upload');

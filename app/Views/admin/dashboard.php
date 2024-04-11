@@ -58,6 +58,11 @@
     <div class="content">
         <h1>Admin Dashboard</h1>
         <!-- Add your dashboard content here -->
+        <form action="<?= site_url('image/upload') ?>" method="post" enctype="multipart/form-data">
+    <input type="file" name="userfile">
+    <input type="submit" value="Upload Image">
+</form>
+
     </div>
 </body>
 </html>

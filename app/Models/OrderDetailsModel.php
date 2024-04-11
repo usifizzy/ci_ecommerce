@@ -9,7 +9,8 @@ class OrderDetailsModel extends Model
     protected $table            = 'orderdetails';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
-    protected $returnType       = 'array';
+    // protected $returnType       = 'array';
+    protected $returnType    = \App\Entities\OrderDetails::class;
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = ['order_id', 'product_name', 'price', 'quantity', 'amount', 'product_id'];

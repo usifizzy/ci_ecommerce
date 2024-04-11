@@ -83,31 +83,33 @@
     <div class="content">
         
     <h2>Order List</h2>
+    
     <table>
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Order No</th>
-                <th>Amount</th>
+                <th>Amount(NGN)</th>
                 <th>Customer Email</th>
                 <th>Customer Name</th>
-                <th>Order Details</th>
+                <th>Status</th>
                 <th> </th>
             </tr>
         </thead>
         <tbody>
         <?php 
         $count = 1;
-        foreach ($get_all_products as $single_products) 
+        foreach ($get_all_orders as $single_products) 
         { ?>
             <tr>
                 <td><?= esc($count++)?></td>
+                <td><?= esc($single_products->order_no) ?></td>
+                <td><?= esc($single_products->amount) ?></td>
+                <td><?= esc($single_products->email) ?></td>
                 <td><?= esc($single_products->name) ?></td>
-                <td><?= esc($single_products->price) ?></td>
-                <td><?= esc($single_products->category) ?></td>
-                <td><?= esc($single_products->description) ?></td>
-                <td><img src="<?= esc('public/uploads/'.$single_products->image)?>" alt="<?= esc($single_products->name) ?>"></td>
-                <td> </td>
+
+                <td><?= esc($single_products->status) ?></td>
+                <td><a href="<?= esc('order/details/'.$single_products->id, 'url');?>"><span>Details</span></a> </td>
             </tr>
             
             <?php

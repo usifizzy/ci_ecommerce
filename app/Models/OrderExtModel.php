@@ -4,16 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class OrderModel extends Model
+class OrderExtModel extends Model
 {
-    protected $table            = 'orders';
+    protected $table            = 'orderexts';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
-    // protected $returnType       = 'array';
-    protected $returnType    = \App\Entities\Order::class;
+    protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['order_no', 'amount', 'status', 'customer_id'];
+    protected $allowedFields    = [];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
