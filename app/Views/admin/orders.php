@@ -67,6 +67,38 @@
         tr:hover {
             background-color: #ddd;
         }
+
+
+
+        /* Styles for pagination container */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        /* Styles for pagination links */
+        .pagination a {
+            padding: 8px 16px;
+            margin: 0 4px;
+            color: #007bff; /* Link color */
+            text-decoration: none;
+            border: 1px solid #007bff; /* Border color */
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        /* Hover effect for pagination links */
+        .pagination a:hover {
+            background-color: #007bff;
+            color: #fff; /* Text color on hover */
+        }
+
+        /* Active page style */
+        .pagination .active {
+            background-color: #007bff;
+            color: #fff;
+        }
     </style>
 </head>
 <body>
@@ -117,6 +149,7 @@
                 ?>
         </tbody>
     </table>
+    <div class="pagination"><?= $pagination ?></div>
     </div>
 </body>
 </html>

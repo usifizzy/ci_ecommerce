@@ -58,7 +58,7 @@ class Store extends BaseController
         $page -= 1; 
 
         $paginationConfig = [
-            'pageCount' => 2,
+            'pageCount' => 10,
             'currentPage' => $page,
             'total' => $this->productModel->countAllResults(),
             'uri' => base_url('store'),
@@ -73,7 +73,6 @@ class Store extends BaseController
         // $renderer = new PagerRenderer($paginationConfig);
         // $renderer->setSurroundCount(3);
         $data['pagination'] = $this->pager->makeLinks($paginationConfig['currentPage'], $paginationConfig['pageCount'], $paginationConfig['total'], 'default_full', $paginationConfig['segment'], 'default');
-        // $data['pagination'] = $this->pager->makeLinks(int $page, ?int $perPage, int $total, string $template = 'default_full', int $segment = 0, ?string $group = 'default')
         return view('app/store', $data);
     }
 

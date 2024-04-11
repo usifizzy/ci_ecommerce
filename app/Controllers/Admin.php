@@ -8,17 +8,21 @@ use App\Models\ProductModel;
 use App\Models\UserModel;
 use App\Models\OrderModel;
 use App\Models\OrderDetailsModel;
+use Config\Services;
+use CodeIgniter\Pager\PagerRenderer;
 
 class Admin extends BaseController
 {
     protected $productModel;
     protected $userModel;
+    protected $pager;
 
     public function __construct() {
         $this->productModel = new ProductModel();
         $this->userModel = new UserModel();
         $this->orderModel = new OrderModel();
         $this->orderDetailsModel = new OrderDetailsModel();
+        $this->pager = Services::pager();
     }
     public function index()
     {
@@ -27,27 +31,69 @@ class Admin extends BaseController
     }
 
 
-    public function products()
+    public function products($page=1)
     {
         $data = array();
-        $data['get_all_products'] = $this->productModel->findAll();
+
+
+        $page -= 1; 
+
+        $paginationConfig = [
+            'pageCount' => 10,
+            'currentPage' => $page,
+            'total' => $this->productModel->countAllResults(),
+            'uri' => base_url('admin/products'),
+            'segment' => 3,
+        ];
+        $offset = $page > 0 ? $paginationConfig['pageCount'] * $page : 0;
+
+        $data['get_all_products'] = $this->productModel->limit($paginationConfig['pageCount'], (int)$offset)->findAll();
+        $data['pagination'] = $this->pager->makeLinks($paginationConfig['currentPage'], $paginationConfig['pageCount'], $paginationConfig['total'], 'default_full', $paginationConfig['segment'], 'default');
         return view('admin/products', $data);
     }
 
 
-    public function customers()
+    public function customers($page=1)
     {
         $data = array();
-        $data['get_all_customers'] = $this->userModel->where(['role' => 'User'])->findAll();
+        
+
+        $page -= 1; 
+
+        $paginationConfig = [
+            'pageCount' => 10,
+            'currentPage' => $page,
+            'total' => $this->productModel->countAllResults(),
+            'uri' => base_url('admin/customers'),
+            'segment' => 3,
+        ];
+        $offset = $page > 0 ? $paginationConfig['pageCount'] * $page : 0;
+
+        $data['get_all_customers'] = $this->userModel->where(['role' => 'User'])->limit($paginationConfig['pageCount'], (int)$offset)->findAll();
+        $data['pagination'] = $this->pager->makeLinks($paginationConfig['currentPage'], $paginationConfig['pageCount'], $paginationConfig['total'], 'default_full', $paginationConfig['segment'], 'default');
         return view('admin/customers', $data);
     }
 
 
-    public function orders()
+    public function orders($page=1)
     {
         $data = array();
+
+
+        $page -= 1; 
+
+        $paginationConfig = [
+            'pageCount' => 10,
+            'currentPage' => $page,
+            'total' => $this->productModel->countAllResults(),
+            'uri' => base_url('admin/orders'),
+            'segment' => 3,
+        ];
+        $offset = $page > 0 ? $paginationConfig['pageCount'] * $page : 0;
+
         // $data['get_all_orders'] = $this->orderModel->findAll();
-        $data['get_all_orders'] = $this->orderModel->select('orders.*, users.name as name, users.email as email')->join('users', 'orders.customer_id = users.id')->findAll();
+        $data['get_all_orders'] = $this->orderModel->select('orders.*, users.name as name, users.email as email')->join('users', 'orders.customer_id = users.id')->limit($paginationConfig['pageCount'], (int)$offset)->findAll();
+        $data['pagination'] = $this->pager->makeLinks($paginationConfig['currentPage'], $paginationConfig['pageCount'], $paginationConfig['total'], 'default_full', $paginationConfig['segment'], 'default');
         return view('admin/orders', $data);
     }
 
