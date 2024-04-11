@@ -150,6 +150,38 @@
         .product-price {
             color: #007bff; /* Change color to your preference */
         }
+
+
+        /* Styles for pagination container */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Styles for pagination links */
+.pagination a {
+    padding: 8px 16px;
+    margin: 0 4px;
+    color: #007bff; /* Link color */
+    text-decoration: none;
+    border: 1px solid #007bff; /* Border color */
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+/* Hover effect for pagination links */
+.pagination a:hover {
+    background-color: #007bff;
+    color: #fff; /* Text color on hover */
+}
+
+/* Active page style */
+.pagination .active {
+    background-color: #007bff;
+    color: #fff;
+}
+
     </style>
 </head>
 
@@ -181,16 +213,20 @@
                 <?php foreach ($get_all_product as $single_products) { ?>
         <!-- Product 1 -->
         <div class="product-item">
-            <a href="<?= esc('store/'.$single_products->id, 'url');?>"><img class="product-image" style="width:250px;height:250px" src="<?= base_url() . esc('uploads/'.$single_products->image )?>" alt="<?= esc($single_products->name) ?>" /></a>
+            <a href="<?= esc('store/product/'.$single_products->id, 'url');?>"><img class="product-image" style="width:250px;height:250px" src="<?= base_url() . esc('uploads/'.$single_products->image )?>" alt="<?= esc($single_products->name) ?>" /></a>
             <div class="product-title"><?= esc($single_products->name) ?></div>
             <div><?php esc(word_limiter($single_products->description, 10)) ?></div>
             <div class="product-price"><span class="price"><?= esc($single_products->price) ?> NGN.</span></div>
-            <div class="button"><span><a href="<?= esc('store/'.$single_products->id, 'url');?>" class="details"><button>Details</button></a></span></div>
+            <div class="button"><span><a href="<?= esc('store/product/'.$single_products->id, 'url');?>" class="details"><button>Details</button></a></span></div>
         </div>
                     <?php
                 }
                 ?>
     </div>
+    <div>
+    <div class="pagination"><?= $pagination ?></div>
+</div>
+
             </div>
 </body>
 </html>

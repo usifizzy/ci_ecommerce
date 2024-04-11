@@ -111,7 +111,7 @@ class Auth extends BaseController
         }
         $post_data = $this->request->getPost(['name', 'email', 'password', 'phone', 'address', 'password_conf']);
         // echo 'pre login check';
-        var_dump($post_data);
+        // var_dump($post_data);
 
         if ($this->validateData($post_data, [
             'email' => 'required|max_length[255]|min_length[4]|valid_email',
@@ -125,7 +125,7 @@ class Auth extends BaseController
             $user = new User();
             $user->setPassword($post_data['password']);
 
-            var_dump($user);
+            // var_dump($user);
 
             $checkLogin = $this->userModel->save([
                 'email' => $post_data['email'],
