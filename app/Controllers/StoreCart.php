@@ -99,27 +99,29 @@ class StoreCart extends BaseController
         $quantity     = $post_data['quantity'];
 
         $this->cart->updateItem($productId, $quantity);
-        redirect('cart');
+        return redirect('cart');
     }
 
-    public function remove_item()
+    public function remove_item($productId)
     {
-        helper('form');
-
-        $product_id = $post_data['product_id'];
         $this->cart->removeItem($productId);
-        redirect('cart');
+        return redirect('cart');
     }
 
     public function empty_cart()
     {
         $this->$cart->clear();
-        redirect('cart');
+        return redirect('cart');
     }
 
 
     public function checkout()
     {
+        $cartItems = $this->session->get('cart_items') ?? [];
+        if (count($cartItems) <= 0) {
+            $this->session->remove('cart_items');
+            return redirect('store');
+        }
         $data = array();
         $data['message'] = ' ';
         $data['status'] = false;
@@ -151,20 +153,20 @@ class StoreCart extends BaseController
                     'product_name' => $cart_items['name'], 
                     'price' => $cart_items['price'], 
                     'quantity' => $cart_items['quantity'], 
-                    // 'amount' => $cart_items['price'] * $cart_items['quantity'], 
+                    'amount' => $cart_items['price'] * $cart_items['quantity'], 
                     'product_id' => $cart_items['product_id']
                 ]);
             }
             $data['message'] = 'Order created successfully. Thank you';
             $data['status'] = true;
+            $this->session->remove('cart_items');
         } catch (\Throwable $th) {
             //throw $th;
             $data['message'] = 'Unable to place order. Please try later';
         }
-        $data['cart_contents'] = $this->cart->getItems();
+        $data['cart_contents'] = $cart_contents;
         $data['isUserLoggedIn'] = $this->session->get('isUserLoggedIn');
         $data['userDetails'] = $this->userModel->find($this->session->get('userId'));
-        $this->session->remove('cart_items');
         return view('app/checkout', $data);
 
         // return redirect ('store');

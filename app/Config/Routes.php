@@ -12,7 +12,7 @@ $routes->get('store/(:num)', 'Store::single/$1');
 $routes->get('cart', 'StoreCart::index');
 $routes->post('store/cart/add', 'StoreCart::add_item');
 $routes->post('store/cart/update', 'StoreCart::update_item');
-$routes->get('store/cart/remove', 'StoreCart::remove_item');
+$routes->get('store/cart/remove/(:num)', 'StoreCart::remove_item/$1');
 $routes->get('store/cart/empty', 'StoreCart::empty_cart');
 $routes->get('cart/checkout', 'StoreCart::checkout');
 $routes->get('cart/checkout/order', 'StoreCart::place_order');
