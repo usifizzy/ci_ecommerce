@@ -90,7 +90,6 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone</th>
-                <th>Address</th>
                 <th>Status</th>
                 <th> </th>
             </tr>
@@ -106,7 +105,6 @@
                 <td><?= esc($single_customer->email) ?></td>
                 <td><?= esc($single_customer->phone) ?></td>
                 <td><?= esc($single_customer->role) ?></td>
-                <td> </td>
                 <td> </td>
             </tr>
             

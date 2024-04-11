@@ -121,6 +121,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
+
         }
         th, td {
             padding: 8px;
@@ -142,6 +143,15 @@
         }
         .checkout-button:hover {
             background-color: #45a049;
+        }
+        .checkout-form {
+            margin-top: 20px;
+        }
+        .checkout-form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
         }
     </style>
 </head>
@@ -172,10 +182,16 @@
 </div>
 
 </header>
-    <h1>Shopping Cart</h1>
+    <h1>Checkout</h1>
+    
+        <div class="checkout-form">
+            <input type="text" value="<?= esc($userDetails->name);?>" disabled>
+            <input type="email" value="<?= esc($userDetails->email);?>" disabled>
+            <input type="text" placeholder="<?= esc($userDetails->name);?>" disabled>
+        </div>
 
 
-    <?php //var_dump($cart_contents) ?>
+    <?php //var_dump($userDetails) ?>
     <table>
         <thead>
             <tr>
@@ -183,7 +199,6 @@
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Total</th>
-                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -200,7 +215,6 @@
                 <td>NGN <?= esc($cart_items['price']) ?></td>
                 <td><?= esc($cart_items['quantity']) ?></td>
                 <td>NGN <?= esc($cart_items['price'] * $cart_items['quantity']) ?></td>
-                <td><button>Remove</button></td>
             </tr>
             
             <?php } ?>
@@ -209,11 +223,13 @@
                 <th> </th>
                 <th> </th>
                 <th>NGN <?= esc($total) ?></th>
-                <th> </th>
             </tr>
         </tbody>
     </table>
-    <a href="<?php echo $isUserLoggedIn ? 'cart/checkout' : 'auth/login'; ?>"><button class="checkout-button">Checkout</button></a>
+            <p><?= esc($message) ?></p>
+    <?php
+            echo $status != true ? '<a href="checkout/order"><button class="checkout-button">Place Order</button></a>' : '';
+            ?>
 
 
                         </div>

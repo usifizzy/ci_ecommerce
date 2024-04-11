@@ -38,11 +38,13 @@ class Store extends BaseController
     protected $productModel;
     protected $session;
     protected $isUserLoggedIn;
+    protected $cartItem;
 
     public function __construct() {
         $this->productModel = new ProductModel();
         $this->session = Services::session();
         $this->isUserLoggedIn = $this->session->get('isUserLoggedIn');
+        $this->cartItem = $this->session->get('cart_items');
     }
 
 
@@ -52,6 +54,7 @@ class Store extends BaseController
         // $data['get_all_product'] = $this->products;
         $data['get_all_product'] = $this->productModel->findAll();
         $data['isUserLoggedIn'] = $this->isUserLoggedIn;
+        $data['hasCart'] = isset($this->cartItem);
         return view('app/store', $data);
     }
 
@@ -69,6 +72,7 @@ class Store extends BaseController
         // }
         $data['get_single_product'] = $this->productModel->find($id);
         $data['isUserLoggedIn'] = $this->isUserLoggedIn;
+        $data['hasCart'] = isset($this->cartItem);
         return view('app/single-item', $data);
     }
 

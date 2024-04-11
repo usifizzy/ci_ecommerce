@@ -24,8 +24,9 @@ class OrderModel extends Migration
                 'constraint' => '38,2',
             ],
             'status' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '16',
+                'type'       => 'ENUM',
+                'constraint' => [ 'pending', 'paid', 'delivered'],
+                'default'    => 'pending',
             ],
             'created_at' => [
                 'type' => 'datetime',

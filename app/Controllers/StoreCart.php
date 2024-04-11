@@ -4,6 +4,9 @@ namespace App\Controllers;
 
 use App\Libraries\Cart;
 use App\Models\ProductModel;
+use App\Models\UserModel;
+use App\Models\OrderModel;
+use App\Models\OrderDetailsModel;
 use Config\Services;
 
 class StoreCart extends BaseController
@@ -41,12 +44,19 @@ class StoreCart extends BaseController
     // );
 
     protected $productModel;
+    protected $orderModel;
+    protected $orderDetailsModel;
+    protected $userModel;
 
     public function __construct()
     {
         // Load the Cart library using dependency injection
         $this->cart = new Cart();
         $this->productModel = new ProductModel();
+            
+        $this->orderModel = new OrderModel();
+        $this->orderDetailsModel = new OrderDetailsModel();
+        $this->userModel = new UserModel();
         $this->session = Services::session();
     }
 
@@ -107,6 +117,58 @@ class StoreCart extends BaseController
         redirect('cart');
     }
 
+
+    public function checkout()
+    {
+        $data = array();
+        $data['message'] = ' ';
+        $data['status'] = false;
+        $data['cart_contents'] = $this->cart->getItems();
+        $data['isUserLoggedIn'] = $this->session->get('isUserLoggedIn');
+        $data['userDetails'] = $this->userModel->find($this->session->get('userId'));
+        return view('app/checkout', $data);
+    }
+
+
+    public function place_order()
+    {
+
+        $data = array();
+        $data['status'] = false;
+        $cart_contents = $this->cart->getItems();
+
+        $totalAmount = 0;
+
+        try {
+            foreach ($cart_contents as $item) {
+                $totalAmount += $item['price'] * $item['quantity'];
+            }
+    
+            $orderId = $this->orderModel->save(['order_no' => random_string('alnum', 10), 'amount' => $totalAmount]);
+            foreach ($cart_contents as $cart_items){
+                $this->orderDetailsModel->save([
+                    'order_id' => $orderId, 
+                    'product_name' => $cart_items['name'], 
+                    'price' => $cart_items['price'], 
+                    'quantity' => $cart_items['quantity'], 
+                    // 'amount' => $cart_items['price'] * $cart_items['quantity'], 
+                    'product_id' => $cart_items['product_id']
+                ]);
+            }
+            $data['message'] = 'Order created successfully. Thank you';
+            $data['status'] = true;
+        } catch (\Throwable $th) {
+            //throw $th;
+            $data['message'] = 'Unable to place order. Please try later';
+        }
+        $data['cart_contents'] = $this->cart->getItems();
+        $data['isUserLoggedIn'] = $this->session->get('isUserLoggedIn');
+        $data['userDetails'] = $this->userModel->find($this->session->get('userId'));
+        $this->session->remove('cart_items');
+        return view('app/checkout', $data);
+
+        // return redirect ('store');
+    }
 
     // private function singleProduct($id) {
         

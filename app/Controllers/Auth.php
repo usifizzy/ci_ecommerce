@@ -86,10 +86,11 @@ class Auth extends BaseController
 
     
     public function logout(){
+        $checkLogin = $this->session->get('userRole');
         $this->session->remove('isUserLoggedIn');
         $this->session->remove('userId');
         $this->session->regenerate();
-        return redirect('auth/login');
+        return $checkLogin == 'Admin' ? redirect('auth/login') : redirect('store');
     }
     
 }

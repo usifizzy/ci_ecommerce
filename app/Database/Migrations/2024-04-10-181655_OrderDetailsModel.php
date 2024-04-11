@@ -35,6 +35,10 @@ class OrderDetailsModel extends Migration
                 'type'       => 'int',
                 'constraint' => '10',
             ],
+            'amount' => [
+                'type'       => 'decimal',
+                'constraint' => '38,2',
+            ],
             'created_at' => [
                 'type' => 'datetime',
             ],

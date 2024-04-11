@@ -154,9 +154,8 @@
             <button id="menuToggle">&#9776;</button>
         </li>
         <li class="menu-item hidden"><a href="/store">Home</a></li>
-        <li class="menu-item hidden"><a href="/cart">Cart</a>
-        <?php echo $isUserLoggedIn ? '<li class="menu-item hidden"><a href="/auth/signout">Sign Out</a>' : ''; ?>
-        </li>
+        <?php echo $hasCart ? '<li class="menu-item hidden"><a href="/cart">Cart</a></li>' : ''; ?>
+        <?php echo $isUserLoggedIn ? '<li class="menu-item hidden"><a href="/auth/signout">Sign Out</a></li>' : ''; ?>
     </ul>
 </div>
 
