@@ -19,6 +19,8 @@ $routes->get('cart/checkout/order', 'StoreCart::place_order');
 $routes->post('auth/login', 'Auth::login');
 $routes->get('auth/login', 'Auth::index');
 $routes->get('auth/signout', 'Auth::logout');
+$routes->get('auth/register', 'Auth::register_g');
+$routes->post('auth/register', 'Auth::register');
 $routes->get('admin', 'Admin::index');
 $routes->get('admin/customers', 'Admin::customers');
 $routes->get('admin/products', 'Admin::products');

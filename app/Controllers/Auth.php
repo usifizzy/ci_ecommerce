@@ -94,4 +94,57 @@ class Auth extends BaseController
         return redirect('store');
     }
     
+
+    public function register_g(){
+        return view('auth/register');
+    }
+
+    public function register(){
+        $data = array();
+        if($this->session->get('success_msg') != null){
+            $data['success_msg'] = $this->session->get('success_msg');
+            $this->session->unset('success_msg');
+        }
+        if($this->session->get('error_msg') != null){
+            $data['error_msg'] = $this->session->get('error_msg');
+            $this->session->unset('error_msg');
+        }
+        $post_data = $this->request->getPost(['name', 'email', 'password', 'phone', 'address', 'password_conf']);
+        // echo 'pre login check';
+        var_dump($post_data);
+
+        if ($this->validateData($post_data, [
+            'email' => 'required|max_length[255]|min_length[4]|valid_email',
+            'password'  => 'required|max_length[5000]|min_length[8]',
+            'address' => 'required|max_length[5000]|min_length[8]',
+            'phone' => 'required|max_length[16]|min_length[8]',
+            'name' => 'required|max_length[32]|min_length[8]',
+            'password_conf' => 'required|max_length[16]|min_length[8]|matches[password]',
+        ])) {
+            
+            $user = new User();
+            $user->setPassword($post_data['password']);
+
+            var_dump($user);
+
+            $checkLogin = $this->userModel->save([
+                'email' => $post_data['email'],
+                'address' => $post_data['address'],
+                'phone' => $post_data['phone'],
+                'email' => $post_data['email'],
+                'name' => $post_data['name'],
+                'password' => $user->password,
+                'role' => 'User',
+                ]);
+            if($checkLogin){
+                return redirect('auth/login');
+            }else{
+                $data['error_msg'] = 'Email of Phone already registered.';
+                return view('auth/register', $data);
+            }
+        }else{
+            $data['error_msg'] = 'Wrong input provided';
+            return view('auth/register', $data);
+        }
+    }
 }

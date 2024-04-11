@@ -186,7 +186,7 @@
         <div class="checkout-form">
             <input type="text" value="<?= esc($userDetails->name);?>" disabled>
             <input type="email" value="<?= esc($userDetails->email);?>" disabled>
-            <input type="text" placeholder="<?= esc($userDetails->name);?>" disabled>
+            <input type="text" placeholder="<?= esc($userDetails->address);?>" disabled>
         </div>
 
 

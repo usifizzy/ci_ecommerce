@@ -185,7 +185,7 @@
             <div class="product-title"><?= esc($single_products->name) ?></div>
             <div><?php esc(word_limiter($single_products->description, 10)) ?></div>
             <div class="product-price"><span class="price"><?= esc($single_products->price) ?> NGN.</span></div>
-            <div class="button"><span><a href="<?= esc('store/'.$single_products->id, 'url');?>" class="details">Details</a></span></div>
+            <div class="button"><span><a href="<?= esc('store/'.$single_products->id, 'url');?>" class="details"><button>Details</button></a></span></div>
         </div>
                     <?php
                 }

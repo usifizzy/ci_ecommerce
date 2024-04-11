@@ -62,6 +62,7 @@
             <input type="password" id="password" name="password" required>
             <input type="submit" value="Login" name="loginSubmit">
         </form>
+        <a href="<?= esc('register', 'url');?>"><span>Don't have an account? Register</span></a>
     </div>
 </body>
 </html>
