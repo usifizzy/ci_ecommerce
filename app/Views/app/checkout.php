@@ -211,9 +211,9 @@
                             ?>
             <tr>
                 <td><?= esc($cart_items['name']) ?></td>
-                <td>NGN <?= esc($cart_items['price']) ?></td>
+                <td>£ <?= esc($cart_items['price']) ?></td>
                 <td><?= esc($cart_items['quantity']) ?></td>
-                <td>NGN <?= esc($cart_items['price'] * $cart_items['quantity']) ?></td>
+                <td>£ <?= esc($cart_items['price'] * $cart_items['quantity']) ?></td>
             </tr>
             
             <?php } ?>
@@ -221,7 +221,7 @@
                 <th> </th>
                 <th> </th>
                 <th> </th>
-                <th>NGN <?= esc($total) ?></th>
+                <th>£<?= esc($total) ?></th>
             </tr>
         </tbody>
     </table>

@@ -154,7 +154,8 @@ class StoreCart extends BaseController
                     'price' => $cart_items['price'], 
                     'quantity' => $cart_items['quantity'], 
                     'amount' => $cart_items['price'] * $cart_items['quantity'], 
-                    'product_id' => $cart_items['product_id']
+                    'product_id' => $cart_items['product_id'],
+                    'customer_id' => $this->session->get('userId')
                 ]);
             }
             $data['message'] = 'Order created successfully. Thank you';

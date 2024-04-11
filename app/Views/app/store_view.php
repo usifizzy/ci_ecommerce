@@ -216,7 +216,7 @@
             <a href="<?= esc('store/product/'.$single_products->id, 'url');?>"><img class="product-image" style="width:250px;height:250px" src="<?= base_url() . esc('uploads/'.$single_products->image )?>" alt="<?= esc($single_products->name) ?>" /></a>
             <div class="product-title"><?= esc($single_products->name) ?></div>
             <div><?php esc(word_limiter($single_products->description, 10)) ?></div>
-            <div class="product-price"><span class="price"><?= esc($single_products->price) ?> NGN.</span></div>
+            <div class="product-price">£<span class="price"><?= esc($single_products->price) ?> </span></div>
             <div class="button"><span><a href="<?= esc('store/product/'.$single_products->id, 'url');?>" class="details"><button>Details</button></a></span></div>
         </div>
                     <?php

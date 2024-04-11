@@ -73,7 +73,7 @@ class Store extends BaseController
         // $renderer = new PagerRenderer($paginationConfig);
         // $renderer->setSurroundCount(3);
         $data['pagination'] = $this->pager->makeLinks($paginationConfig['currentPage'], $paginationConfig['pageCount'], $paginationConfig['total'], 'default_full', $paginationConfig['segment'], 'default');
-        return view('app/store', $data);
+        return view('app/store_view', $data);
     }
 
 

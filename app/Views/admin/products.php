@@ -138,7 +138,7 @@
                 <td><?= esc($single_products->price) ?></td>
                 <td><?= esc($single_products->category) ?></td>
                 <td><?= esc($single_products->description) ?></td>
-                <td><img src="<?= esc('uploads/'.$single_products->image)?>" alt="<?= esc($single_products->name) ?>"></td>
+                <td><img src="<?= base_url() . esc('uploads/'.$single_products->image )?>" alt="<?= esc($single_products->name) ?>"></td>
                 <td> </td>
             </tr>
             

@@ -21,7 +21,7 @@ class Auth extends BaseController
 
     public function index()
     {
-        return view('auth/login');
+        return view('auth/login_view');
     }
 
        
@@ -75,11 +75,11 @@ class Auth extends BaseController
                 }
             }else{
                 $data['error_msg'] = 'Wrong email or password, please try again.';
-                return view('auth/login', $data);
+                return view('auth/login_view', $data);
             }
         }else{
             $data['error_msg'] = 'Wrong email or password, please try again.';
-            return view('auth/login', $data);
+            return view('auth/login_view', $data);
         }
     }
     

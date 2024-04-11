@@ -121,7 +121,7 @@
             <tr>
                 <th>ID</th>
                 <th>Order No</th>
-                <th>Amount(NGN)</th>
+                <th>Amount(£)</th>
                 <th>Customer Email</th>
                 <th>Customer Name</th>
                 <th>Status</th>
