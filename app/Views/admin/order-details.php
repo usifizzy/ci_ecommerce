@@ -77,6 +77,9 @@
             <li>Orders</li>
             <li><a href="/admin/customers">Customers</a></li>
             <li><a href="/auth/signout">Sign Out</a></li>
+            <br>
+            <br>
+            <li><a href="/">Store</a></li>
         </ul>
     </div>
 

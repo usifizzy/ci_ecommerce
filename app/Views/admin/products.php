@@ -109,12 +109,17 @@
             <li><a href="/admin/orders">Orders</a></li>
             <li><a href="/admin/customers">Customers</a></li>
             <li><a href="/auth/signout">Sign Out</a></li>
+            <br>
+            <br>
+            <li><a href="/">Store</a></li>
         </ul>
     </div>
 
     <div class="content">
         
     <h2>Product List</h2>
+    <br>
+    <a href="<?= esc('/products/add', 'url'); ?>"><button>Add New Product</button></a>
     <table>
         <thead>
             <tr>

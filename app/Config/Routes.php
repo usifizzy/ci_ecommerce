@@ -31,7 +31,8 @@ $routes->get('admin/products/(:num)', 'Admin::products/$1');
 $routes->get('admin/orders/(:num)', 'Admin::orders/$1');
 $routes->get('admin/order/details/(:num)', 'Admin::order_details/$1');
 // $routes->get('admin/products/(:num)', 'Admin::index');
-$routes->get('admin/add/products', 'Admin::upload');
+$routes->get('admin/products/add', 'Admin::new_product');
 $routes->get('admin/delete/products/(:num)', 'Admin::delete_product');
 
+$routes->get('product/upload', 'Admin::upload');
 $routes->post('product/upload', 'Admin::upload');

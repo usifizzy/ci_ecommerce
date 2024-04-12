@@ -107,28 +107,130 @@ class Admin extends BaseController
         return view('admin/order-details', $data);
     }
 
+    public function new_product()
+    {
+        $data = array();
+        return view('admin/new-product', $data);
+    }
 
     public function upload()
     {
-        $this->validate([
+        $post_data = $this->request->getPost(['name', 'price', 'category', 'description']);
+
+        var_dump($post_data);
+        var_dump($this->validateData($post_data, [
+            'description' => 'required|max_length[5000]|min_length[4]',
+            'category' => 'required|max_length[256]|min_length[8]',
+            'price' => 'required|numeric|decimal|greater_than[0]',
+            'name' => 'required|max_length[32]|min_length[8]',
+        ]));
+        // var_dump($this->validateData->getErrors());
+        if ($this->validateData($post_data, [
+            'description' => 'required|max_length[5000]|min_length[4]',
+            'category' => 'required|max_length[256]|min_length[8]',
+            'price' => 'required|numeric|decimal|greater_than[0]',
+            'name' => 'required|max_length[32]|min_length[8]',
+        ])){
+            $this->validate([
+                'userfile' => [
+                    'uploaded[userfile]',
+                    'max_size[userfile,100]',
+                    'mime_in[userfile,image/png,image/jpg,image/gif]',
+                    'ext_in[userfile,png,jpg,gif]',
+                    'max_dims[userfile,1024,768]',
+                ],
+            ]);
+
+            $file = $this->request->getFile('userfile');
+            // $file = $post_data['userfile'];
+            var_dump($file);
+
+    
+            if (! $path = $file->store()) {
+                return view('upload_form', ['error' => 'upload failed']);
+            }
+            $imageData = ['upload_file_path' => $path];
+    
+            var_dump($imageData);
+    
+            $newProduct = $this->productModel->save(
+                [
+                    'name' => $post_data['name'], 
+                    'price' => $post_data['price'], 
+                    'category' => $post_data['category'], 
+                    'description' => $post_data['description'], 
+                    'image' => $imageData
+                ]
+            );
+            if ($newProduct) {
+                return redirect('admin/products');
+            } else {
+                return view('admin/new-product', $data);
+            }
+            
+
+        }else {
+            // return view('admin/new-product', $data);
+
+            var_dump($this->validateData->getErrors());
+        }
+
+    }
+
+
+    public function xupload()
+    {
+        // $this->validate([
+        //     'userfile' => [
+        //         'uploaded[userfile]',
+        //         'max_size[userfile,100]',
+        //         'mime_in[userfile,image/png,image/jpg,image/gif]',
+        //         'ext_in[userfile,png,jpg,gif]',
+        //         'max_dims[userfile,1024,768]',
+        //     ],
+        // ]);
+
+
+        $post_data = $this->request->getPost(['name', 'price', 'category', 'description', 'userfile']);
+
+        if ($this->validateData($post_data, [
+            'description' => 'required|max_length[515]|min_length[4]',
+            'category' => 'required|max_length[5000]|min_length[8]',
+            'price' => 'required|max_length[16]|min_length[8]',
+            'name' => 'required|max_length[32]|min_length[8]',
             'userfile' => [
                 'uploaded[userfile]',
                 'max_size[userfile,100]',
                 'mime_in[userfile,image/png,image/jpg,image/gif]',
                 'ext_in[userfile,png,jpg,gif]',
                 'max_dims[userfile,1024,768]',
-            ],
-        ]);
+            ]
+        ]))
 
-        $file = $this->request->getFile('userfile');
+        // $file = $this->request->getFile('userfile');
+        $file = $post_data['userfile'];
 
         if (! $path = $file->store()) {
             return view('upload_form', ['error' => 'upload failed']);
         }
-        $data = ['upload_file_path' => $path];
+        $imageData = ['upload_file_path' => $path];
 
-        var_dump($data);
+        // var_dump($data);
 
-        // return view('admin/dashboard', $data);
+        $newProduct = $this->productModel->save(
+            [
+                'name' => $post_data['name'], 
+                'price' => $post_data['name'], 
+                'category' => $post_data['name'], 
+                'description' => $post_data['name'], 
+                'image' => $imageData
+            ]
+        );
+        if ($newProduct) {
+            return redirect('admin/products');
+        } else {
+            return view('admin/new-product', $data);
+        }
+
     }
 }

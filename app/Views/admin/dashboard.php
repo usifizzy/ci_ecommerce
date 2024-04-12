@@ -52,17 +52,15 @@
             <li><a href="/admin/orders">Orders</a></li>
             <li><a href="/admin/customers">Customers</a></li>
             <li><a href="/auth/signout">Sign Out</a></li>
+            <br>
+            <br>
+            <li><a href="/">Store</a></li>
         </ul>
     </div>
 
     <div class="content">
         <h1>Admin Dashboard</h1>
-        <!-- Add your dashboard content here -->
-        <form action="<?= site_url('image/upload') ?>" method="post" enctype="multipart/form-data">
-    <input type="file" name="userfile">
-    <input type="submit" value="Upload Image">
-</form>
-
+       
     </div>
 </body>
 </html>
