@@ -60,7 +60,7 @@
 
     <div class="content">
         <h1>Admin Dashboard</h1>
-       
+       <p>Work in progress...</p>
     </div>
 </body>
 </html>

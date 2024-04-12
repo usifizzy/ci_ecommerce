@@ -16,6 +16,9 @@ class Admin extends BaseController
     protected $productModel;
     protected $userModel;
     protected $pager;
+    protected $session;
+    protected $isUserLoggedIn;
+    protected $role;
 
     public function __construct() {
         $this->productModel = new ProductModel();
@@ -23,9 +26,16 @@ class Admin extends BaseController
         $this->orderModel = new OrderModel();
         $this->orderDetailsModel = new OrderDetailsModel();
         $this->pager = Services::pager();
+        $this->session = Services::session();
+        $this->isUserLoggedIn = $this->session->get('isUserLoggedIn');
+        $this->role = $this->session->get('userRole');
     }
     public function index()
     {
+        var_dump($this->session);
+        if (!$this->isUserLoggedIn || $this->role != 'Admin') {
+            return redirect('store');
+        }
         $data = array();
         return view('admin/dashboard', $data);
     }
@@ -34,6 +44,9 @@ class Admin extends BaseController
     public function products($page=1)
     {
         $data = array();
+        if (!$this->isUserLoggedIn || $this->role != 'Admin') {
+            return redirect('store');
+        }
 
 
         $page -= 1; 
@@ -55,6 +68,9 @@ class Admin extends BaseController
 
     public function customers($page=1)
     {
+        if (!$this->isUserLoggedIn || $this->role != 'Admin') {
+            return redirect('store');
+        }
         $data = array();
         
 
@@ -77,6 +93,9 @@ class Admin extends BaseController
 
     public function orders($page=1)
     {
+        if (!$this->isUserLoggedIn || $this->role != 'Admin') {
+            return redirect('store');
+        }
         $data = array();
 
 
@@ -100,6 +119,9 @@ class Admin extends BaseController
 
     public function order_details($id)
     {
+        if (!$this->isUserLoggedIn || $this->role != 'Admin') {
+            return redirect('store');
+        }
         $data = array();
         // $data['order_no'] = $this->orderModel->where(['id' => $id])->find()->findColumn('order_no');
         $data['order'] = $this->orderModel->find($id)->order_no;
@@ -109,12 +131,18 @@ class Admin extends BaseController
 
     public function new_product()
     {
+        if (!$this->isUserLoggedIn || $this->role != 'Admin') {
+            return redirect('store');
+        }
         $data = array();
         return view('admin/new-product', $data);
     }
 
     public function upload()
     {
+        if (!$this->isUserLoggedIn || $this->role != 'Admin') {
+            return redirect('store');
+        }
         $post_data = $this->request->getPost(['name', 'price', 'category', 'description']);
 
         var_dump($post_data);
@@ -170,9 +198,9 @@ class Admin extends BaseController
             
 
         }else {
-            // return view('admin/new-product', $data);
-
-            var_dump($this->validateData->getErrors());
+            return view('admin/new-product', $data);
+//
+            // var_dump($this->validateData->getErrors());
         }
 
     }
