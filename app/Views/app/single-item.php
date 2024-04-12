@@ -200,7 +200,7 @@
         <div class="product-content">
             <div class="product-title"><?= esc($get_single_product->name) ?></div>
             <div class="product-description">
-            <?php esc($get_single_product->description) ?>
+            <?= esc($get_single_product->description) ?>
             </div>
             <div class="product-price">£<?= esc($get_single_product->price) ?></div>
             <!-- <button>Add to Cart</button> -->
