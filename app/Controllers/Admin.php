@@ -32,7 +32,7 @@ class Admin extends BaseController
     }
     public function index()
     {
-        var_dump($this->session);
+        // var_dump($this->session);
         if (!$this->isUserLoggedIn || $this->role != 'Admin') {
             return redirect('store');
         }
