@@ -207,7 +207,7 @@
 
             <div class="add-cart">
                         <form action="<?= esc('store/cart/add', 'url');?>" method="post">
-                            <input type="number" class="buyfield" name="quantity" value="1"/>
+                            <input type="number" class="buyfield" name="quantity" value="1" min="1"/>
                             <input type="hidden" class="buyfield" name="product_id" value="<?= esc($get_single_product->id)?>"/>
                             <input type="submit" class="buysubmit" name="submit" value="Add to Cart"/>
                         </form>				

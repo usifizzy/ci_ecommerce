@@ -146,7 +146,7 @@ class StoreCart extends BaseController
                 $totalAmount += $item['price'] * $item['quantity'];
             }
     
-            $orderId = $this->orderModel->save(['order_no' => random_string('alnum', 10), 'amount' => $totalAmount]);
+            $orderId = $this->orderModel->save(['order_no' => random_string('alnum', 10), 'amount' => $totalAmount], 'customer_id' => $this->session->get('userId'));
             foreach ($cart_contents as $cart_items){
                 $this->orderDetailsModel->save([
                     'order_id' => $orderId, 
