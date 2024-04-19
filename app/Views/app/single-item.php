@@ -217,6 +217,7 @@
             <div class="product-price">£<?= esc($get_single_product->price) ?></div>
             <!-- <button>Add to Cart</button> -->
 
+            <?php if($userRole != 'Admin') { ?>
             <div class="add-cart">
                         <form action="<?= esc('store/cart/add', 'url');?>" method="post">
                             <input type="number" class="buyfield" name="quantity" value="1" min="1"/>
@@ -224,6 +225,7 @@
                             <input type="submit" class="buysubmit" name="submit" value="Add to Cart"/>
                         </form>				
                     </div>
+            <?php } ?>
         </div>
     </div>
     </div>

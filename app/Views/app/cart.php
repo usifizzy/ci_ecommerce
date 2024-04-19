@@ -225,8 +225,10 @@
             </tr>
         </tbody>
     </table>
-    <a href="<?php echo $isUserLoggedIn ? 'cart/checkout' : 'auth/login'; ?>"><button class="checkout-button">Checkout</button></a>
 
+    <?php if($userRole != 'Admin') { ?>
+    <a href="<?php echo $isUserLoggedIn ? 'cart/checkout' : 'auth/login'; ?>"><button class="checkout-button">Checkout</button></a>
+    <?php } ?>
 
                         </div>
                     </body>

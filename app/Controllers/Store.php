@@ -71,6 +71,7 @@ class Store extends BaseController
         $data['isUserLoggedIn'] = $this->isUserLoggedIn;
         $data['hasCart'] = isset($this->cartItem);
         $data['userName'] = $this->session->get('userName');
+        $data['userRole'] = $this->session->get('userRole');
         // $renderer = new PagerRenderer($paginationConfig);
         // $renderer->setSurroundCount(3);
         $data['pagination'] = $this->pager->makeLinks($paginationConfig['currentPage'], $paginationConfig['pageCount'], $paginationConfig['total'], 'default_full', $paginationConfig['segment'], 'default');
@@ -93,6 +94,7 @@ class Store extends BaseController
         $data['isUserLoggedIn'] = $this->isUserLoggedIn;
         $data['hasCart'] = isset($this->cartItem);
         $data['userName'] = $this->session->get('userName');
+        $data['userRole'] = $this->session->get('userRole');
         return view('app/single-item', $data);
     }
 
