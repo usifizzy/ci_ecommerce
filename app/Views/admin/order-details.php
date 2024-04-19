@@ -72,6 +72,9 @@
 <body>
     <div class="sidebar">
         <ul>
+            <li>Hi, <?= esc($userName) ?></li>
+            <br>
+            <br>
             <li><a href="/admin">Dashboard</a></li>
             <li><a href="/admin/products">Products</a></li>
             <li>Orders</li>

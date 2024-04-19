@@ -104,6 +104,9 @@
 <body>
     <div class="sidebar">
         <ul>
+            <li>Hi, <?= esc($userName) ?></li>
+            <br>
+            <br>
             <li><a href="/admin">Dashboard</a></li>
             <li>Products</li>
             <li><a href="/admin/orders">Orders</a></li>
@@ -144,7 +147,7 @@
                 <td><?= esc($single_products->category) ?></td>
                 <td><?= esc($single_products->description) ?></td>
                 <td><img src="<?= base_url() . esc('uploads/'.$single_products->image )?>" alt="<?= esc($single_products->name) ?>" class="product-image" style="width:250px;height:250px"></td>
-                <td> </td>
+                <td><a href="<?= esc('products/update/'.$single_products->id, 'url');?>">Edit</a> | <a href="<?= esc('products/delete/'.$single_products->id, 'url');?>">Delete</a> </td>
             </tr>
             
             <?php

@@ -37,6 +37,13 @@ class Admin extends BaseController
             return redirect('store');
         }
         $data = array();
+        $data['userName'] = $this->session->get('userName');
+        $data['last_orders'] = $this->orderModel->select('orders.*, users.name as name, users.email as email')->join('users', 'orders.customer_id = users.id')->orderBy('created_at', 'desc')->limit(5)->findAll(); 
+        $data['totalOrderAmount'] = $this->orderModel->selectSum('amount');
+        // var_dump($this->orderModel->selectSum('amount')->find()->amount);
+        $data['orderCount'] = $this->orderModel->countAllResults();
+        $data['customers'] = $this->userModel->where(['role' => 'User'])->countAllResults();
+
         return view('admin/dashboard', $data);
     }
 
@@ -60,6 +67,7 @@ class Admin extends BaseController
         ];
         $offset = $page > 0 ? $paginationConfig['pageCount'] * $page : 0;
 
+        $data['userName'] = $this->session->get('userName');
         $data['get_all_products'] = $this->productModel->limit($paginationConfig['pageCount'], (int)$offset)->findAll();
         $data['pagination'] = $this->pager->makeLinks($paginationConfig['currentPage'], $paginationConfig['pageCount'], $paginationConfig['total'], 'default_full', $paginationConfig['segment'], 'default');
         return view('admin/products', $data);
@@ -85,6 +93,7 @@ class Admin extends BaseController
         ];
         $offset = $page > 0 ? $paginationConfig['pageCount'] * $page : 0;
 
+        $data['userName'] = $this->session->get('userName');
         $data['get_all_customers'] = $this->userModel->where(['role' => 'User'])->limit($paginationConfig['pageCount'], (int)$offset)->findAll();
         $data['pagination'] = $this->pager->makeLinks($paginationConfig['currentPage'], $paginationConfig['pageCount'], $paginationConfig['total'], 'default_full', $paginationConfig['segment'], 'default');
         return view('admin/customers', $data);
@@ -110,6 +119,7 @@ class Admin extends BaseController
         ];
         $offset = $page > 0 ? $paginationConfig['pageCount'] * $page : 0;
 
+        $data['userName'] = $this->session->get('userName');
         // $data['get_all_orders'] = $this->orderModel->findAll();
         $data['get_all_orders'] = $this->orderModel->select('orders.*, users.name as name, users.email as email')->join('users', 'orders.customer_id = users.id')->limit($paginationConfig['pageCount'], (int)$offset)->findAll();
         $data['pagination'] = $this->pager->makeLinks($paginationConfig['currentPage'], $paginationConfig['pageCount'], $paginationConfig['total'], 'default_full', $paginationConfig['segment'], 'default');
@@ -126,6 +136,7 @@ class Admin extends BaseController
         // $data['order_no'] = $this->orderModel->where(['id' => $id])->find()->findColumn('order_no');
         $data['order'] = $this->orderModel->find($id)->order_no;
         $data['get_all_orders'] = $this->orderDetailsModel->findAll($id);
+        $data['userName'] = $this->session->get('userName');
         return view('admin/order-details', $data);
     }
 
@@ -171,7 +182,7 @@ class Admin extends BaseController
 
             $file = $this->request->getFile('userfile');
             // $file = $post_data['userfile'];
-            var_dump($file);
+            // var_dump($file);
 
     
             if (! $path = $file->store()) {
@@ -179,7 +190,7 @@ class Admin extends BaseController
             }
             $imageData = ['upload_file_path' => $path];
     
-            var_dump($imageData);
+            // var_dump($imageData);
     
             $newProduct = $this->productModel->save(
                 [

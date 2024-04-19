@@ -59,6 +59,7 @@ class Auth extends BaseController
                     $this->session->set('isUserLoggedIn',TRUE);
                     $this->session->set('userId',$checkLogin->id);
                     $this->session->set('userRole',$checkLogin->role);
+                    $this->session->set('userName',$checkLogin->name);
                     return $checkLogin->role == 'Admin' ? redirect('admin') : (isset($cartItems) ? redirect('cart') : redirect('store'));
                     // if ($checkLogin->role == 'Admin') {
                     //     redirect('admin');

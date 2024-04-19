@@ -67,6 +67,7 @@ class StoreCart extends BaseController
         $data = array();
         $data['cart_contents'] = $this->cart->getItems();
         $data['isUserLoggedIn'] = $this->session->get('isUserLoggedIn');
+        $data['userName'] = $this->session->get('userName');
         return view('app/cart', $data);
     }
 
@@ -125,6 +126,7 @@ class StoreCart extends BaseController
         $data = array();
         $data['message'] = ' ';
         $data['status'] = false;
+        $data['userName'] = $this->session->get('userName');
         $data['cart_contents'] = $this->cart->getItems();
         $data['isUserLoggedIn'] = $this->session->get('isUserLoggedIn');
         $data['userDetails'] = $this->userModel->find($this->session->get('userId'));
@@ -146,7 +148,7 @@ class StoreCart extends BaseController
                 $totalAmount += $item['price'] * $item['quantity'];
             }
     
-            $orderId = $this->orderModel->save(['order_no' => random_string('alnum', 10), 'amount' => $totalAmount], 'customer_id' => $this->session->get('userId'));
+            $orderId = $this->orderModel->save(['order_no' => random_string('alnum', 10), 'amount' => $totalAmount, 'customer_id' => $this->session->get('userId')]);
             foreach ($cart_contents as $cart_items){
                 $this->orderDetailsModel->save([
                     'order_id' => $orderId, 
@@ -168,6 +170,7 @@ class StoreCart extends BaseController
         $data['cart_contents'] = $cart_contents;
         $data['isUserLoggedIn'] = $this->session->get('isUserLoggedIn');
         $data['userDetails'] = $this->userModel->find($this->session->get('userId'));
+        $data['userName'] = $this->session->get('userName');
         return view('app/checkout', $data);
 
         // return redirect ('store');

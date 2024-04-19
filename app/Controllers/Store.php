@@ -70,6 +70,7 @@ class Store extends BaseController
         $data['get_all_product'] = $this->productModel->limit($paginationConfig['pageCount'], (int)$offset)->findAll();
         $data['isUserLoggedIn'] = $this->isUserLoggedIn;
         $data['hasCart'] = isset($this->cartItem);
+        $data['userName'] = $this->session->get('userName');
         // $renderer = new PagerRenderer($paginationConfig);
         // $renderer->setSurroundCount(3);
         $data['pagination'] = $this->pager->makeLinks($paginationConfig['currentPage'], $paginationConfig['pageCount'], $paginationConfig['total'], 'default_full', $paginationConfig['segment'], 'default');
@@ -91,6 +92,7 @@ class Store extends BaseController
         $data['get_single_product'] = $this->productModel->find($id);
         $data['isUserLoggedIn'] = $this->isUserLoggedIn;
         $data['hasCart'] = isset($this->cartItem);
+        $data['userName'] = $this->session->get('userName');
         return view('app/single-item', $data);
     }
 

@@ -32,6 +32,15 @@
         .menu {
             padding: .4rem 2rem;
         }
+        .menu-user {
+            /* padding: .4rem 2rem; */
+            text-align: right;
+        }
+        menu-user .user-log {
+            float: right;
+            /* height: 44px; */
+            /* padding: .4rem .5rem; */
+        }
         header ul {
             border-bottom: 1px solid rgba(242, 242, 242, 1);
             list-style-type: none;
@@ -157,6 +166,10 @@
 </head>
 <body>
     <div class="container">
+
+    <div class="menu-user">
+        <?php echo $isUserLoggedIn ? '<p class="user-log">Hi, '.$userName.'</p>' : '<p> </p>';?>
+    </div>
 
 <header>
 
