@@ -129,19 +129,19 @@
             <div class="card success">
                 <div>
                     <h2>Total Sales</h2>
-                    <p>£<?= var_dump($totalOrderAmount->amount) ?></p>
+                    <p>£<?= esc(number_format($totalOrderAmount, 2)) ?></p>
                 </div>
             </div>
             <div class="card warning">
                 <div>
                     <h2>Orders</h2>
-                    <p><?= esc($orderCount) ?></p>
+                    <p><?= esc(number_format($orderCount)) ?></p>
                 </div>
             </div>
             <div class="card danger">
                 <div>
                     <h2>Customers</h2>
-                    <p><?= esc($customers) ?></p>
+                    <p><?= esc(number_format($customers)) ?></p>
                 </div>
             </div>
         </div>
@@ -170,7 +170,7 @@
             <tr>
                 <td><?= esc($single_products->created_at)?></td>
                 <td><?= esc($single_products->order_no) ?></td>
-                <td><?= esc($single_products->amount) ?></td>
+                <td><?= esc( number_format($single_products->amount, 2)) ?></td>
                 <td><?= esc($single_products->email) ?></td>
                 <td><?= esc($single_products->name) ?></td>
                 <td><a href="<?= esc('admin/order/details/'.$single_products->id, 'url');?>"><span>Details</span></a> </td>

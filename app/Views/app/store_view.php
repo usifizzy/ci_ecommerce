@@ -212,6 +212,7 @@
         <li class="menu-toggle">
             <button id="menuToggle">&#9776;</button>
         </li>
+        <?php echo $userRole == 'Admin' ?  '<li class="menu-item hidden"><a href="/admin">Admin</a></li>' : '';  ?>
         <li class="menu-item hidden"><a href="/store">Home</a></li>
         <?php echo $hasCart ? '<li class="menu-item hidden"><a href="/cart">Cart</a></li>' : ''; ?>
         <?php echo $isUserLoggedIn ? '<li class="menu-item hidden"><a href="/auth/signout">Sign Out</a></li>' : '<li class="menu-item hidden"><a href="/auth/login">Sign In</a></li>'; ?>
@@ -228,7 +229,7 @@
             <a href="<?= esc('store/product/'.$single_products->id, 'url');?>"><img class="product-image" style="width:250px;height:250px" src="<?= base_url() . esc('uploads/'.$single_products->image )?>" alt="<?= esc($single_products->name) ?>" /></a>
             <div class="product-title"><?= esc($single_products->name) ?></div>
             <div><?= esc(word_limiter($single_products->description, 10)) ?></div>
-            <div class="product-price">£<span class="price"><?= esc($single_products->price) ?> </span></div>
+            <div class="product-price">£<span class="price"><?= esc(number_format($single_products->price, 2)) ?> </span></div>
             <div class="button"><span><a href="<?= esc('store/product/'.$single_products->id, 'url');?>" class="details"><button>Details</button></a></span></div>
         </div>
                     <?php

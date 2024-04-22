@@ -35,7 +35,8 @@ class ProductModel extends Migration
                 'constraint' => '100',
             ],
             'created_at' => [
-                'type' => 'datetime',
+                'type' => 'datetime', 
+                'default' => new RawSql('CURRENT_TIMESTAMP')
             ],
             'updated_at' => [
                 'type' => 'datetime',

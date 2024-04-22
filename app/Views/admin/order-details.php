@@ -94,9 +94,9 @@
             <tr>
                 <th>ID</th>
                 <th>Product</th>
-                <th>Price(NGN)</th>
+                <th>Price(£)</th>
                 <th>Quantity</th>
-                <th>Amount(NGN)</th>
+                <th>Amount(£)</th>
             </tr>
         </thead>
         <tbody>
@@ -110,9 +110,9 @@
             <tr>
                 <td><?= esc($count++)?></td>
                 <td><?= esc($single_products->product_name) ?></td>
-                <td><?= esc($single_products->price) ?></td>
-                <td><?= esc($single_products->quantity) ?></td>
-                <td><?= esc($single_products->price * $single_products->quantity) ?></td>
+                <td><?= esc(number_format($single_products->price, 2)) ?></td>
+                <td><?= esc(number_format($single_products->quantity)) ?></td>
+                <td><?= esc(number_format($single_products->price * $single_products->quantity, 2)) ?></td>
             </tr>
             
             <?php
@@ -124,7 +124,7 @@
                 <th> </th>
                 <th> </th>
                 <th> </th>
-                <th>NGN <?= esc($total) ?></th>
+                <th>£ <?= esc(number_format($total, 2)) ?></th>
             </tr>
         </tbody>
     </table>

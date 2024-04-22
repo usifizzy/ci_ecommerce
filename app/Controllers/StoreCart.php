@@ -131,6 +131,7 @@ class StoreCart extends BaseController
         $data['cart_contents'] = $this->cart->getItems();
         $data['isUserLoggedIn'] = $this->session->get('isUserLoggedIn');
         $data['userDetails'] = $this->userModel->find($this->session->get('userId'));
+        $data['userRole'] = $this->session->get('userRole');
         return view('app/checkout', $data);
     }
 
@@ -172,6 +173,7 @@ class StoreCart extends BaseController
         $data['isUserLoggedIn'] = $this->session->get('isUserLoggedIn');
         $data['userDetails'] = $this->userModel->find($this->session->get('userId'));
         $data['userName'] = $this->session->get('userName');
+        $data['userRole'] = $this->session->get('userRole');
         return view('app/checkout', $data);
 
         // return redirect ('store');

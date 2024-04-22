@@ -196,6 +196,7 @@
         <li class="menu-toggle">
             <button id="menuToggle">&#9776;</button>
         </li>
+        <?php echo $userRole == 'Admin' ?  '<li class="menu-item hidden"><a href="/admin">Admin</a></li>' : '';  ?>
         <li class="menu-item hidden"><a href="/store">Home</a></li>
         <?php echo $hasCart ? '<li class="menu-item hidden"><a href="/cart">Cart</a></li>' : ''; ?>
         <?php echo $isUserLoggedIn ? '<li class="menu-item hidden"><a href="/auth/signout">Sign Out</a></li>' : '<li class="menu-item hidden"><a href="/auth/login">Sign In</a></li>'; ?>
@@ -214,7 +215,7 @@
             <div class="product-description">
             <?= esc($get_single_product->description) ?>
             </div>
-            <div class="product-price">£<?= esc($get_single_product->price) ?></div>
+            <div class="product-price">£<?= esc(number_format($get_single_product->price, 2)) ?></div>
             <!-- <button>Add to Cart</button> -->
 
             <?php if($userRole != 'Admin') { ?>

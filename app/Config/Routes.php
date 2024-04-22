@@ -32,7 +32,9 @@ $routes->get('admin/orders/(:num)', 'Admin::orders/$1');
 $routes->get('admin/order/details/(:num)', 'Admin::order_details/$1');
 // $routes->get('admin/products/(:num)', 'Admin::index');
 $routes->get('admin/products/add', 'Admin::new_product');
-$routes->get('admin/delete/products/(:num)', 'Admin::delete_product');
+$routes->get('admin/products/delete/(:num)', 'Admin::delete_product/$1');
+$routes->get('admin/products/update/(:num)', 'Admin::edit_product/$1');
+$routes->post('admin/products/update/(:num)', 'Admin::update_product/$1');
 
 $routes->get('product/upload', 'Admin::upload');
 $routes->post('product/upload', 'Admin::upload');

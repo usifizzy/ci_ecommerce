@@ -33,7 +33,8 @@ class OrderModel extends Migration
                 'default'    => 'pending',
             ],
             'created_at' => [
-                'type' => 'datetime',
+                'type' => 'datetime', 
+                'default' => new RawSql('CURRENT_TIMESTAMP')
             ],
             'updated_at' => [
                 'type' => 'datetime',

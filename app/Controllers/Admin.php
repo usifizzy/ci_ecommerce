@@ -39,8 +39,7 @@ class Admin extends BaseController
         $data = array();
         $data['userName'] = $this->session->get('userName');
         $data['last_orders'] = $this->orderModel->select('orders.*, users.name as name, users.email as email')->join('users', 'orders.customer_id = users.id')->orderBy('created_at', 'desc')->limit(5)->findAll(); 
-        $data['totalOrderAmount'] = $this->orderModel->selectSum('amount');
-        // var_dump($this->orderModel->selectSum('amount')->find()->amount);
+        $data['totalOrderAmount'] = $this->orderModel->selectSum('amount')->find()[0]->amount;
         $data['orderCount'] = $this->orderModel->countAllResults();
         $data['customers'] = $this->userModel->where(['role' => 'User'])->countAllResults();
 
@@ -146,7 +145,96 @@ class Admin extends BaseController
             return redirect('store');
         }
         $data = array();
+        $data['userName'] = $this->session->get('userName');
         return view('admin/new-product', $data);
+    }
+
+    public function edit_product($id)
+    {
+        if (!$this->isUserLoggedIn || $this->role != 'Admin') {
+            return redirect('store');
+        }
+        $data = array();
+        $product = $this->productModel->find($id);
+        if (!$product) {
+            return redirect('admin');
+        }
+        $data['product'] = $product;
+        $data['userName'] = $this->session->get('userName');
+        return view('admin/edit-product', $data);
+        
+    }
+
+    public function update_product($id)
+    {
+        if (!$this->isUserLoggedIn || $this->role != 'Admin') {
+            return redirect('store');
+        }
+        $product = $this->productModel->find($id);
+
+        $post_data = $this->request->getPost(['name', 'price', 'description']);
+
+        if ($this->validateData($post_data, [
+            'description' => 'required|max_length[5000]|min_length[4]',
+            // 'category' => 'required|max_length[256]|min_length[8]',
+            'price' => 'required|numeric|decimal|greater_than[0]',
+            'name' => 'required|max_length[32]|min_length[8]',
+        ])){
+            $imageData = '';
+            $isNewUpload = false;
+         
+            try {
+                $this->validate([
+                    'userfile' => [
+                        'uploaded[userfile]',
+                        'max_size[userfile,100]',
+                        'mime_in[userfile,image/png,image/jpg,image/gif]',
+                        'ext_in[userfile,png,jpg,gif]',
+                        'max_dims[userfile,1024,768]',
+                    ],
+                ]);
+                $file = $this->request->getFile('userfile');
+            
+                if (! $path = $file->store()) {
+                    return view('upload_form', ['error' => 'upload failed']);
+                }
+                $isNewUpload = true;
+                $imageData = ['upload_file_path' => $path];
+
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
+    
+            if ($this->productModel->update(
+                $id, [
+                    'name' => $post_data['name'], 
+                    'price' => $post_data['price'], 
+                    'category' => $product->category, 
+                    'description' => $post_data['description'], 
+                    'image' => $isNewUpload ? $imageData : $product->image
+                ]
+            )) {
+                return redirect('admin/products');
+            } else {
+                return view('admin/edit-product', $data);
+            }   
+
+        }else {
+            return view('admin/new-product', $data);
+            // var_dump($this->validateData->getErrors());
+        }
+        
+    }
+
+    public function delete_product($id)
+    {
+        if (!$this->isUserLoggedIn || $this->role != 'Admin') {
+            return redirect('store');
+        }
+        $data = array();
+        $this->productModel->delete(['id' => $id]);
+        return redirect('admin/products');
+        
     }
 
     public function upload()
@@ -156,13 +244,13 @@ class Admin extends BaseController
         }
         $post_data = $this->request->getPost(['name', 'price', 'category', 'description']);
 
-        var_dump($post_data);
-        var_dump($this->validateData($post_data, [
-            'description' => 'required|max_length[5000]|min_length[4]',
-            'category' => 'required|max_length[256]|min_length[8]',
-            'price' => 'required|numeric|decimal|greater_than[0]',
-            'name' => 'required|max_length[32]|min_length[8]',
-        ]));
+        // var_dump($post_data);
+        // var_dump($this->validateData($post_data, [
+        //     'description' => 'required|max_length[5000]|min_length[4]',
+        //     'category' => 'required|max_length[256]|min_length[8]',
+        //     'price' => 'required|numeric|decimal|greater_than[0]',
+        //     'name' => 'required|max_length[32]|min_length[8]',
+        // ]));
         // var_dump($this->validateData->getErrors());
         if ($this->validateData($post_data, [
             'description' => 'required|max_length[5000]|min_length[4]',
@@ -210,7 +298,6 @@ class Admin extends BaseController
 
         }else {
             return view('admin/new-product', $data);
-//
             // var_dump($this->validateData->getErrors());
         }
 

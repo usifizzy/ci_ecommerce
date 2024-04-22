@@ -142,7 +142,7 @@
             <tr>
                 <td><?= esc($count++)?></td>
                 <td><?= esc($single_products->order_no) ?></td>
-                <td><?= esc($single_products->amount) ?></td>
+                <td><?= esc(number_format($single_products->amount, 2)) ?></td>
                 <td><?= esc($single_products->email) ?></td>
                 <td><?= esc($single_products->name) ?></td>
 

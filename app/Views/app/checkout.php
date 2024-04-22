@@ -183,6 +183,7 @@
         <li class="menu-toggle">
             <button id="menuToggle">&#9776;</button>
         </li>
+        <?php echo $userRole == 'Admin' ?  '<li class="menu-item hidden"><a href="/admin">Admin</a></li>' : '';  ?>
         <li class="menu-item hidden"><a href="/store">Home</a></li>
         <li class="menu-item hidden"><a href="/cart">Cart</a></li>
         <?php echo $isUserLoggedIn ? '<li class="menu-item hidden"><a href="/auth/signout">Sign Out</a></li>' : '<li class="menu-item hidden"><a href="/auth/login">Sign In</a></li>'; ?>
@@ -224,9 +225,9 @@
                             ?>
             <tr>
                 <td><?= esc($cart_items['name']) ?></td>
-                <td>£ <?= esc($cart_items['price']) ?></td>
-                <td><?= esc($cart_items['quantity']) ?></td>
-                <td>£ <?= esc($cart_items['price'] * $cart_items['quantity']) ?></td>
+                <td>£ <?= esc(number_format($cart_items['price'], 2)) ?></td>
+                <td><?= esc(number_format($cart_items['quantity'])) ?></td>
+                <td>£ <?= esc(number_format($cart_items['price'] * $cart_items['quantity'], 2)) ?></td>
             </tr>
             
             <?php } ?>
@@ -234,7 +235,7 @@
                 <th> </th>
                 <th> </th>
                 <th> </th>
-                <th>£<?= esc($total) ?></th>
+                <th>£<?= esc(number_format($total, 2)) ?></th>
             </tr>
         </tbody>
     </table>

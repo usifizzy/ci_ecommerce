@@ -40,7 +40,8 @@ class OrderDetailsModel extends Migration
                 'constraint' => '38,2',
             ],
             'created_at' => [
-                'type' => 'datetime',
+                'type' => 'datetime', 
+                'default' => new RawSql('CURRENT_TIMESTAMP')
             ],
             'updated_at' => [
                 'type' => 'datetime',
